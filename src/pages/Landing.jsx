@@ -8,6 +8,7 @@ import Electricians from "../assets/Electrician.webp"
 import waterPurifier from "../assets/Water-Purifier.webp"
 import { CiStar } from "react-icons/ci";
 import { PiUsersThreeLight } from "react-icons/pi";
+import SliderHome from './SliderHome'
 
 
 
