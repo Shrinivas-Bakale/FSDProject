@@ -12,6 +12,8 @@ export default {
         NavLinkHover: "#a59380",
         lightText: "#f6f3ec",
         darkText: "#36302a",
+        arrow: "#b9a590",
+        arrowHover: "#8b7b6b",
         brand: {
           light: "#3da9fc",
           DEFAULT: "#0077c8",
