@@ -11,7 +11,7 @@ const Navbar = () => {
                 <div className='container mx-auto '>
                     <div className='grid grid-cols-1'>
                         <nav className=' border-b-[1px] border-[#36302a]'>
-                            <div className='flex justify-between items-center text-[#f6f3ec] p-2 px-10 text-xl'>
+                            <div className='flex justify-between items-center text-[#f6f3ec] p-1 px-10 text-xl'>
                                 <div className='logo flex gap-9 items-center'>
                                     <img src={logo} alt="" className='w-20' />
                                     <div className='flex gap-5 items-center '>

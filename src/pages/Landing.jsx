@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import HomeBanner from "../assets/1719293199714-da733e.webp"
 import womenSpa from "../assets/women-spa.webp"
 import menSalon from "../assets/Mens-Salon.webp"
@@ -43,6 +43,7 @@ const Landing = () => {
     },
   ]
 
+
   return (
     <div className='bg-lightBackground'>
       <div className='container mx-auto '>
@@ -64,7 +65,7 @@ const Landing = () => {
                       <div key={index} className='underline-link'>
                         <div className='p-1 flex justify-center items-center flex-col gap-1 ' >
                           <div className=' bg-NavLinkBackground px-10 py-3 rounded-md'>
-                            <img src={item.img} alt="" />
+                            <img src={item.img} alt="" className='transform transition-transform duration-300 hover:scale-110' />
                           </div>
                           {item.title}
                         </div>
@@ -100,7 +101,7 @@ const Landing = () => {
             </div>
 
             <div className='w-1/2  p-3'>
-              <img src={HomeBanner} alt="" className='w-full h-cover' />
+              <img src={HomeBanner} alt="" className='w-full h-cover transform transition-transform duration-300 hover:scale-105 rounded-2xl' />
             </div>
           </section>
 
@@ -109,6 +110,7 @@ const Landing = () => {
           </section>
 
         </div>
+
       </div>
 
 
