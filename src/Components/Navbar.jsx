@@ -35,7 +35,7 @@ const Navbar = () => {
                                     <NavLink>
                                         <IoCart className='text-3xl' />
                                     </NavLink>
-                                    <NavLink > Login</NavLink>
+                                    <NavLink className="underline-link" to={"/login"}> Login</NavLink>
                                     <NavLink className=' p-2 text-xl bg-NavLinkBackground text-NavLinkText rounded-lg hover:bg-NavLinkHover'>Get in touch</NavLink>
                                 </div>
 

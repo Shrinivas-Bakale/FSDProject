@@ -5,6 +5,7 @@ export default {
     extend: {
       // Custom Colors
       colors: {
+        lighterBackground: "#f6f3ec",
         lightBackground: "#574c3f",
         darkBackground: "#36302a",
         NavLinkBackground: "#b9a590",
