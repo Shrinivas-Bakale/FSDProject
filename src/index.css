@@ -12,6 +12,25 @@ body {
   font-family: "Syne", sans-serif;
 }
 
+/* Style the scrollbar */
+::-webkit-scrollbar {
+  width: 5px; 
+}
+
+::-webkit-scrollbar-track {
+  background: black; /* Background color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: white; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+/* Optional: Change the thumb color on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover */
+}
+
 .main-logo {
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
@@ -35,7 +54,7 @@ body {
   background: url("./assets/Home-Main-Banner.jpg") no-repeat center center;
   background-size: contain; /* Ensures the whole image is visible */
   /* z-index: -1; */
-  transform: scale(1.6)  translateX(8%); /* Scale the image */
+  transform: scale(1.6) translateX(8%); /* Scale the image */
 }
 
 .underline-link {
@@ -95,18 +114,17 @@ body {
 }
 
 @keyframes fadeIn {
-  0%{
+  0% {
     opacity: 0;
   }
-  100%{
+  100% {
     opacity: 1;
   }
 }
 
-.aos-fade{
-  animation: fadeIn 1.7s ease-out; 
+.aos-fade {
+  animation: fadeIn 1.7s ease-out;
 }
-
 
 .feedback {
   transition: opacity 0.5s ease;
@@ -124,8 +142,8 @@ body {
 .footer-gradient {
   background: rgb(246, 243, 236);
   background: linear-gradient(
-    90deg,b
-    rgba(246, 243, 236, 1) 0%,
+    90deg,
+    b rgba(246, 243, 236, 1) 0%,
     rgba(54, 48, 42, 1) 0%,
     rgba(139, 123, 107, 1) 100%
   );
@@ -134,9 +152,8 @@ body {
 .login-background {
   position: relative;
   width: 100%;
-  height: 100vh; 
+  height: 100vh;
   overflow: hidden;
-  background: url("./assets/login-bg1b.jpg");
+  background: url("./assets/login-bg1.jpg");
   background-size: cover;
 }
-
