@@ -83,7 +83,7 @@ const Landing = () => {
 
 
   return (
-    <div className='bg-[#1c1c1c]'>
+    <div className='bg-black'>
       <div className='container mx-auto '>
         <div className='grid grid-cols-1'>
 
@@ -161,7 +161,7 @@ const Landing = () => {
                       <li>Book an Appointment: Schedule a time that’s convenient for you.</li>
                       <li>Get the Job Done: Enjoy high-quality service with transparent pricing.</li>
                     </ol>
-                    <p className='text-2xl mt-4'>
+                    <p className='text-xl mt-4 opacity-50'>
                       *All transactions are secure and hassle-free, with no hidden fees.
                     </p>
 
@@ -178,18 +178,23 @@ const Landing = () => {
           </section>
 
           <section>
-            <div className='flex flex-col justify-center items-center bg-darkBackground text-lightText p-10'>
+            <div className='flex flex-col justify-center items-center bg-lighterBackground text-darkText p-10'>
 
               <div className='flex justify-center items-center'>
                 <div>
                   <h2 className='text-3xl font-semibold '>
                     What Our Customers Say
                   </h2>
-                  <div className={`mt-5 feedback ${fade ? 'feedback-exit' : 'feedback-enter'} text-lightText`}>
+                  <div className={`mt-5 feedback ${fade ? 'feedback-exit' : 'feedback-enter'} border-4 rounded-2xl border-gray-700 p-4 `}>
                     <p className='text-2xl'>
-                      “
+                      <span className='text-8xl'>
+                        “
+                      </span>
                       {feedbacks[currentFeedbackIndex]}
-                      ”
+                      {/* <span className='text-6xl'>
+
+                        ”
+                      </span> */}
                     </p>
                   </div>
                 </div>
@@ -199,11 +204,11 @@ const Landing = () => {
 
               <div className='flex gap-5 mt-5'>
 
-                <button className='bg-NavLinkBackground text-NavLinkText hover:bg-NavLinkHover p-3 rounded-full' onClick={handlePrevious}>
+                <button className='bg-NavLinkBackground text-NavLinkText hover:bg-NavLinkHover hover:text-black p-3 rounded-full' onClick={handlePrevious}>
                   <GrFormPrevious className='text-3xl' />
                 </button>
 
-                <button className='bg-NavLinkBackground text-NavLinkText hover:bg-NavLinkHover p-3 rounded-full' onClick={handleNext}>
+                <button className='bg-NavLinkBackground text-NavLinkText hover:bg-NavLinkHover hover:text-black p-3 rounded-full' onClick={handleNext}>
                   <GrFormNext className='text-3xl' />
                 </button>
               </div>

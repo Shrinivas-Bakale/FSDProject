@@ -88,7 +88,7 @@ const SliderHome = () => {
     };
 
     return (
-        <div>
+        <div className='bg-black'>
             <div className="bg-darkBackground overflow-x-hidden pb-10 aos">
 
                 <div className="flex justify-between items-center mb-3 lg:mb-4 lg:flex-row flex-col md:flex-row xl:mb-6 px-10 ">
@@ -110,7 +110,7 @@ const SliderHome = () => {
                 <div className='lg:w-11/12 lg:ml-10 md:w-11/12 md:ml-8 xl:w-full 2xl:w-full xl:px-8 xl:ml-2 2xl:px-12 '>
                     <Slider ref={sliderRef} {...settings}>
                         {sliderContent.map((item, index) => (
-                            <div className="flex flex-col justify-center items-start " key={index}>
+                            <div className="flex flex-col justify-center items-start p-3" key={index}>
                                 <img src={item.img} alt="" className='rounded-2xl transform transition-transform duration-300 hover:scale-105' />
                                 <h5 className='font-semibold text-lg text-lightText mt-3'>{item.title}</h5>
                             </div>

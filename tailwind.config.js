@@ -8,7 +8,7 @@ export default {
         lighterBackground: "#fafafa",
         // lighterBackground: "#f6f3ec",
         // lightBackground: "#574c3f",
-        lightBackground: "#1c1c1c",
+        lightBackground: "#000000",
         // darkBackground: "#36302a",
         darkBackground: "#000000",
         NavLinkBackground: "#000000",
