@@ -83,69 +83,35 @@ const Landing = () => {
 
 
   return (
-    <div className='bg-lightBackground'>
+    <div className='bg-[#1c1c1c]'>
       <div className='container mx-auto '>
         <div className='grid grid-cols-1'>
 
-          <section className='flex gap-6 w-full mt-10 text-lightText bg-lightBackground px-5'>
-            <div className='w-1/2 flex flex-col gap-8 mb-5'>
-              <div>
-                <h2 className='text-5xl font-semibold'>Home services at your <br /> doorstep</h2>
-              </div>
-              <div className='border-[1px] border-darkBackground w-11/12'>
-                <div className='p-3'>
-                  <h4 className='text-2xl'>
-                    Providing Services like...
-                  </h4>
 
-                  <div className='grid grid-cols-3 gap-5 mt-4'>
+          <section className='p-2 z-0'>
 
-                    {gridContent.map((item, index) => (
-                      <div key={index} className='underline-link'>
-                        <div className='p-1 flex justify-center items-center flex-col gap-1 ' >
-                          <div className=' bg-NavLinkBackground px-10 py-3 rounded-md'>
-                            <img src={item.img} alt="" className='transform transition-transform duration-300 hover:scale-110'
-                              style={{
-                                mixBlendMode: 'color-burn'
-                              }} />
-                          </div>
-                          {item.title}
-                        </div>
-                      </div>
-                    ))}
+            <div className='flex gap-6 w-full   min-h-screen text-darkText  px-5  home-main-background rounded-3xl z-10'>
+              
 
-                  </div>
-
+              <div className='flex justify-around items-center relative'>
+                <div className='ml-14 relative bottom-6 '>
+                  <h1 className='text-7xl font-semibold relative z-50 bottom-8'>
+                    Home services at<br /> your  doorstep
+                  </h1>
+                  <button className='p-3 bg-black text-white font-semibold rounded-xl'>
+                    Explore Our Services
+                  </button>
+                  <button className='p-3 bg-transparent border-[1px] ml-5 border-gray-700 text-black font-semibold rounded-xl'>
+                    Button
+                  </button>
                 </div>
               </div>
 
-              <div className='flex justify-between items-center w-11/12'>
-
-                <div className='p-1 flex justify-center items-center  gap-3 ' >
-                  <CiStar className='text-5xl' />
-                  <div className='flex flex-col '>
-                    <h5 className='text-3xl font-semibold'>4.8</h5>
-                    <p>Service Rating</p>
-                  </div>
-                </div>
-
-                <div className='p-1 flex justify-center items-center  gap-3 ' >
-                  <PiUsersThreeLight className='text-5xl' />
-                  <div className='flex flex-col '>
-                    <h5 className='text-3xl font-semibold'>12M+</h5>
-                    <p>Customers Globally</p>
-                  </div>
-                </div>
-
-
-              </div>
-
+              
             </div>
 
-            <div className='w-1/2  p-3'>
-              <img src={HomeBanner} alt="" className='w-full h-cover transform transition-transform duration-300 hover:scale-105 rounded-2xl' />
-            </div>
           </section>
+
 
           <section>
             <SliderHome />
@@ -198,7 +164,7 @@ const Landing = () => {
                     </p>
 
                     <div className='mt-5 flex justify-start w-full'>
-                      <NavLink className=' p-2 text-xl bg-NavLinkBackground font-thin  text-NavLinkText rounded-lg hover:bg-NavLinkHover'>Get in touch</NavLink>
+                      <NavLink className=' p-2 text-xl bg-NavLinkBackground font-thin  text-NavLinkText rounded-lg hover:bg-NavLinkHover border-[1px] border-[#fafafa] hover:text-NavLinkBackground'>Know More</NavLink>
                     </div>
 
                   </div>

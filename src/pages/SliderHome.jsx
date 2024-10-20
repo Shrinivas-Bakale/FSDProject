@@ -92,7 +92,7 @@ const SliderHome = () => {
             <div className="bg-darkBackground overflow-x-hidden pb-10 aos">
 
                 <div className="flex justify-between items-center mb-3 lg:mb-4 lg:flex-row flex-col md:flex-row xl:mb-6 px-10 ">
-                    <p className="font-semibold text-lightText text-5xl mt-5 ">New <br /> Services</p>
+                    <p className="font-semibold text-lightText text-5xl mt-5 ">Our <br /> Services</p>
                     <div className="flex justify-end items-center gap-2  lg:mt-5 mt-5 md:mt-8 ">
                         <button onClick={() => sliderRef.current.slickPrev()}>
                             <div className="bg-arrow hover:bg-arrowHover p-3 rounded-full">

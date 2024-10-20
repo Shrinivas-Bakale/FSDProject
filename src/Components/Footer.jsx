@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 const Footer = () => {
     return (
-        <div className=' footer-gradient  z-50'>
+        <div className=' bg-black  z-50 border-t-[1px] border-[#36302a]'>
             <div className='container mx-auto '>
                 <div className='grid grid-cols-1'>
                     <div className='flex justify-start items-center p-10'>
@@ -15,14 +15,13 @@ const Footer = () => {
                             <br />
 
                             <p>123 Demo Street, New York, NY 12345</p>
-                            <br /><br />
 
                             <p>
                                 (555) 555-5555 <br />
                                 email@example.com
                             </p>
 
-                            <NavLink className=' p-2 text-xl mt-4 w-32 bg-NavLinkBackground text-NavLinkText rounded-lg hover:bg-NavLinkHover'>Get in touch</NavLink>
+                            <NavLink className=' p-2 text-xl mt-2 w-32 border-2 border-[#fafafa] bg-NavLinkBackground text-NavLinkText rounded-lg hover:bg-NavLinkHover hover:text-NavLinkBackground'>Get in touch</NavLink>
 
 
                         </div>

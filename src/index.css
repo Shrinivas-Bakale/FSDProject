@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,7 +9,33 @@ html {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Syne", sans-serif;
+}
+
+.main-logo {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.home-main-background {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full screen height */
+  overflow: hidden;
+}
+
+.home-main-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("./assets/Home-Main-Banner.jpg") no-repeat center center;
+  background-size: contain; /* Ensures the whole image is visible */
+  /* z-index: -1; */
+  transform: scale(1.6); /* Scale the image */
 }
 
 .underline-link {
@@ -21,7 +49,7 @@ body {
   position: absolute;
   width: 100%;
   height: 3px;
-  background-color: #a59380;
+  background-color: #fafafa;
   bottom: 0;
   left: 0;
   transform: scaleX(0);
@@ -57,11 +85,11 @@ body {
 }
 
 .feedback-exit {
-  opacity: 0; 
+  opacity: 0;
 }
 
 .feedback-enter {
-  opacity: 1; 
+  opacity: 1;
 }
 
 .footer-gradient {
@@ -74,11 +102,12 @@ body {
   );
 }
 
-.login-background{
-  background: url('./assets/login-signup-bg.png');
+.login-background {
+  position: relative;
+  width: 100%;
+  height: 100vh; 
+  overflow: hidden;
+  background: url("./assets/login-bg1.jpg");
+  background-size: cover;
 }
 
-.login-shadow{
-  background-color: #a59380b3;
-
-}

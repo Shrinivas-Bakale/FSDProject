@@ -4,11 +4,15 @@ import './App.css'
 import Layout from './Components/Layout'
 import Login from './pages/Onboarding/Login'
 import Signup from './pages/Onboarding/Signup'
+import Example from './pages/firebase/example';
+import UserAuthentication from './pages/firebase/UserAuthentication'
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path='userauthentication' element={<UserAuthentication />} />
+        <Route path='example' element={<Example />} />
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<Signup />} />
         <Route path="/" element={<Layout />} >
