@@ -8,7 +8,7 @@ const Signup = () => {
       <div className='login-background  min-h-screen'>
         <div className='login-shadow min-h-screen'>
           <div className='flex justify-center items-center '>
-            <div className='p-5 flex flex-col justify-center w-1/3 bg-lighterBackground text-darkText mt-32 rounded-lg'>
+            <div className='p-5 flex flex-col justify-center w-1/4 bg-lighterBackground text-darkText mt-32 rounded-lg'>
               <div className='flex justify-between items-center'>
                 <div>
                   <h1 className='text-3xl'>
@@ -17,7 +17,9 @@ const Signup = () => {
                 </div>
 
                 <div>
-                  <img src={logo} alt="" className='w-20' />
+                  <h1 className='main-logo text-3xl mt-1'>
+                    Nexenstial
+                  </h1>
                 </div>
 
               </div>

@@ -16,7 +16,7 @@ const Navbar = () => {
                             <div className='flex justify-between items-center text-[#f6f3ec] p-1 px-10 text-xl'>
                                 <div className='logo flex gap-9 items-center'>
                                     {/* <img src={logo} alt="" className='w-20' /> */}
-                                    <h1 className='main-logo text-[38px]'>
+                                    <h1 className='main-logo text-[38px] mt-3'>
                                         Nexenstial
                                     </h1>
                                     <div className='flex gap-5 items-center '>

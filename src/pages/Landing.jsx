@@ -88,26 +88,28 @@ const Landing = () => {
         <div className='grid grid-cols-1'>
 
 
-          <section className='p-2 z-0'>
+          <section className='p-2 z-0 aos-fade'>
 
             <div className='flex gap-6 w-full   min-h-screen text-darkText  px-5  home-main-background rounded-3xl z-10'>
-              
+
 
               <div className='flex justify-around items-center relative'>
-                <div className='ml-14 relative bottom-6 '>
-                  <h1 className='text-7xl font-semibold relative z-50 bottom-8'>
-                    Home services at<br /> your  doorstep
+                <div className='ml-14 relative bottom-6 aos-home '>
+                  <h1 className='text-6xl font-semibold relative z-50 bottom-8'>
+                    {/* Home services at<br /> your  doorstep */}
+                    Experience reliable, <br /> Professional solutions <br /> At your doorstep.
                   </h1>
-                  <button className='p-3 bg-black text-white font-semibold rounded-xl'>
-                    Explore Our Services
-                  </button>
-                  <button className='p-3 bg-transparent border-[1px] ml-5 border-gray-700 text-black font-semibold rounded-xl'>
+
+                  <button className='p-4 bg-transparent border-[1px] text-[18px] transition-all duration-300 hover:scale-105 border-gray-700 text-black font-semibold rounded-xl'>
                     Button
+                  </button>
+                  <button className='p-4 bg-black text-white text-[18px] ml-5 transition-all duration-300 hover:scale-105 font-semibold rounded-xl' onClick={() => window.scrollTo(768, 768)}>
+                    Explore Our Services
                   </button>
                 </div>
               </div>
 
-              
+
             </div>
 
           </section>
@@ -146,7 +148,7 @@ const Landing = () => {
                     <img src={buildingRoof} className='w-64 rounded-lg' alt="" />
                   </div>
 
-                  <div className='w-3/5  flex flex-col justify-center items-center px-10 text-base'>
+                  <div className='w-3/5  flex flex-col justify-center items-center px-10 py-10 text-base'>
                     <h3 className='text-3xl font-semibold mb-4'>
                       How It Works?
                     </h3>
@@ -160,7 +162,7 @@ const Landing = () => {
                       <li>Get the Job Done: Enjoy high-quality service with transparent pricing.</li>
                     </ol>
                     <p className='text-2xl mt-4'>
-                      All transactions are secure and hassle-free, with no hidden fees.
+                      *All transactions are secure and hassle-free, with no hidden fees.
                     </p>
 
                     <div className='mt-5 flex justify-start w-full'>

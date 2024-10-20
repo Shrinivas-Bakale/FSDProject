@@ -95,13 +95,13 @@ const SliderHome = () => {
                     <p className="font-semibold text-lightText text-5xl mt-5 ">Our <br /> Services</p>
                     <div className="flex justify-end items-center gap-2  lg:mt-5 mt-5 md:mt-8 ">
                         <button onClick={() => sliderRef.current.slickPrev()}>
-                            <div className="bg-arrow hover:bg-arrowHover p-3 rounded-full">
-                                <IoIosArrowBack className="text-white" />
+                            <div className=" hover:bg-arrowHover p-3 rounded-full">
+                                <IoIosArrowBack className="text-white hover:text-black" />
                             </div>
                         </button>
                         <button onClick={() => sliderRef.current.slickNext()}>
-                            <div className="bg-arrow hover:bg-arrowHover p-3 rounded-full">
-                                <IoIosArrowForward className="text-white" />
+                            <div className=" hover:bg-arrowHover p-3 rounded-full">
+                                <IoIosArrowForward className="text-white hover:text-black" />
                             </div>
                         </button>
                     </div>
