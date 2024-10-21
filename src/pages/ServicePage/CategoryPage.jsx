@@ -141,7 +141,7 @@ const CategoryPage = () => {
                 serviceModal && (
 
                     <div className='fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 gap-4 z-50 flex justify-center items-center' >
-                        <section className='px-72 py-16  flex justify-center items-center ' >
+                        <section className='px-72 py-16  flex justify-center items-center aos-home' >
                             <div
                                 className=' h-3/4  rounded-3xl  flex  items-center p-5 gap-4 bg-white' ref={serviceModalRef}>
                                 <div className='w-1/2 h-[95%] rounded-3xl'>

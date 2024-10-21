@@ -110,7 +110,7 @@ body {
 }
 
 .aos-home {
-  animation: slideIn 0.7s ease-in-out; /* Adjust duration and easing */
+  animation: slideIn 0.4s ease-in-out; /* Adjust duration and easing */
 }
 
 @keyframes fadeIn {
