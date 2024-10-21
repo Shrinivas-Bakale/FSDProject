@@ -1,10 +1,34 @@
 import React from 'react'
-import logo from "../../assets/service-logo-template-design-vector_20029-567.avif"
-
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import toast, { Toaster } from 'react-hot-toast';
+import { app } from '../firebase/firebase'
 
 const Signup = () => {
+
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const auth = getAuth(app)
+
+
+  const signup = (e) => {
+    e.preventDefault();
+    createUserWithEmailAndPassword
+      (auth, email, password,)
+      .then((userCredentials) => {
+        console.log(userCredentials)
+        toast.success("User Created")
+      })
+      .catch((error) => {
+        console.log(error)
+        toast.error(error.message)
+      })
+  }
+
   return (
     <div>
+      <Toaster position="top-right" reverseOrder={false} />
+
       <div className='login-background  min-h-screen'>
         <div className='login-shadow min-h-screen'>
           <div className='flex justify-center items-center '>
@@ -25,23 +49,41 @@ const Signup = () => {
               </div>
 
               <div className='flex flex-col justify-center'>
-                <div className='mt-4 w-full'>
-                  <label className='text-2xl'>
-                    Email
-                  </label>
-                  <input type="text" placeholder='Email' className='p-2 rounded-lg mt-2 w-full' />
-                </div>
+                <form action="" onSubmit={signup}>
+                  <div className='mt-4 w-full'>
 
-                <div className='mt-4 w-full'>
-                  <label className='text-2xl'>
-                    Password
-                  </label>
-                  <input type="password" placeholder='Password' className='p-2 rounded-lg mt-2 w-full' />
-                </div>
+                    <h2 className='text-2xl'>
+                      Email
+                    </h2>
+                    <input type="text"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                      placeholder='Email'
+                      className='p-2 rounded-lg mt-2 w-full' />
+                  </div>
 
-                <div className='mt-4 w-full'>
-                  <button className='p-2 rounded-lg mt-2 w-full hover:bg-NavLinkHover text-NavLinkText bg-NavLinkBackground'>Sign up</button>
-                </div>
+                  <div className='mt-4 w-full'>
+                    <h2 className='text-2xl'>
+                      Password
+                    </h2>
+                    <input type="password"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                      placeholder='Password'
+                      className='p-2 rounded-lg mt-2 w-full' />
+                  </div>
+
+                  <div className='mt-4 w-full'>
+                    <button
+                      type='submit'
+                      className='p-2 rounded-lg mt-2 w-full hover:bg-NavLinkHover hover:text-black text-NavLinkText bg-NavLinkBackground'
+                    >
+                      Sign up
+                    </button>
+                  </div>
+                </form>
 
               </div>
             </div>
