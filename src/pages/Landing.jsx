@@ -14,6 +14,8 @@ import buildingRoof from "../assets/building-roof.jpeg"
 import { NavLink } from 'react-router-dom'
 import { GrFormNext } from "react-icons/gr";
 import { GrFormPrevious } from "react-icons/gr";
+import ServicePage from './ServicePage/ServicePage'
+import service from '../assets/login-bg.jpg'
 
 
 
@@ -22,6 +24,7 @@ const Landing = () => {
 
   const [currentFeedbackIndex, setCurrentFeedbackIndex] = useState(0);
   const [fade, setFade] = useState(false);
+  const [serviceModal, setServiceModal] = useState(false);
 
   const gridContent = [
     {
@@ -83,146 +86,198 @@ const Landing = () => {
 
 
   return (
-    <div className='bg-black'>
-      <div className='container mx-auto '>
-        <div className='grid grid-cols-1'>
+    <>
+      <div className='bg-black'>
+        <div className='container mx-auto '>
+          <div className='grid grid-cols-1'>
 
 
-          <section className='p-2 z-0 aos-fade'>
+            <section className='p-2 z-0 aos-fade'>
 
-            <div className='flex gap-6 w-full   min-h-screen text-darkText  px-5  home-main-background rounded-3xl z-10'>
+              <div className='flex gap-6 w-full   min-h-screen text-darkText  px-5  home-main-background rounded-3xl z-10'>
 
 
-              <div className='flex justify-around items-center relative'>
-                <div className='ml-14 relative bottom-6 aos-home '>
-                  <h1 className='text-6xl font-semibold relative z-50 bottom-8'>
-                    {/* Home services at<br /> your  doorstep */}
-                    Experience reliable, <br /> Professional solutions <br /> At your doorstep.
-                  </h1>
+                <div className='flex justify-around items-center relative'>
+                  <div className='ml-14 relative bottom-6 aos-home '>
+                    <h1 className='text-6xl font-semibold relative z-50 bottom-8'>
+                      {/* Home services at<br /> your  doorstep */}
+                      Experience reliable, <br /> Professional solutions <br /> At your doorstep.
+                    </h1>
 
-                  <button className='p-4 bg-transparent border-[1px] text-[18px] transition-all duration-300 hover:scale-105 border-gray-700 text-black font-semibold rounded-xl'>
-                    Button
-                  </button>
-                  <button className='p-4 bg-black text-white text-[18px] ml-5 transition-all duration-300 hover:scale-105 font-semibold rounded-xl' onClick={() => window.scrollTo(768, 768)}>
-                    Explore Our Services
-                  </button>
+                    <button className='p-4 bg-transparent border-[1px] text-[18px] transition-all duration-300 hover:scale-105 border-gray-700 text-black font-semibold rounded-xl'>
+                      Button
+                    </button>
+                    <button className='p-4 bg-black text-white text-[18px] ml-5 transition-all duration-300 hover:scale-105 font-semibold rounded-xl' onClick={() => window.scrollTo(768, 768)}>
+                      Explore Our Services
+                    </button>
+                  </div>
+                </div>
+
+
+              </div>
+
+            </section>
+
+
+            <section>
+              <SliderHome />
+              {/* <button className='p-4 bg-black text-white text-[18px] ml-5 transition-all duration-300 hover:scale-105 font-semibold rounded-xl' onClick={() => { setServiceModal(true) }}>
+                Button
+              </button> */}
+            </section>
+
+            <section>
+              <div className='bg-lighterBackground h-[50vh] flex justify-center items-center font-mono font-semibold text-darkText text-3xl text-center'>
+                <div className='px-5'>
+                  <Typewriter onInit={(typewriter) => {
+                    typewriter
+                      .typeString(`"Get Started Now..!!"`)
+                      .pauseFor(2000)
+                      .deleteAll()
+                      .typeString(`"Connecting You with Trusted Service Experts at Your Fingertips"`)
+                      .pauseFor(2000)
+                      .deleteAll()
+                      .typeString(`"Book verified professionals for home repairs, beauty, cleaning, and more — all in one place."`)
+                      .pauseFor(2000)
+                      .deleteAll()
+                      .start()
+                  }} options={{ autoStart: true, loop: true, delay: 20, deleteSpeed: 20 }} />
                 </div>
               </div>
+            </section>
 
+            <section>
+              <div className='bg-lightBackground p-5 flex justify-center items-center font-semibold text-lightText text-3xl '>
+                <div className='px-5'>
+                  <div className='flex w-full gap-2'>
 
-            </div>
-
-          </section>
-
-
-          <section>
-            <SliderHome />
-          </section>
-
-          <section>
-            <div className='bg-lighterBackground h-[50vh] flex justify-center items-center font-mono font-semibold text-darkText text-3xl text-center'>
-              <div className='px-5'>
-                <Typewriter onInit={(typewriter) => {
-                  typewriter
-                    .typeString(`"Get Started Now..!!"`)
-                    .pauseFor(2000)
-                    .deleteAll()
-                    .typeString(`"Connecting You with Trusted Service Experts at Your Fingertips"`)
-                    .pauseFor(2000)
-                    .deleteAll()
-                    .typeString(`"Book verified professionals for home repairs, beauty, cleaning, and more — all in one place."`)
-                    .pauseFor(2000)
-                    .deleteAll()
-                    .start()
-                }} options={{ autoStart: true, loop: true, delay: 20, deleteSpeed: 20 }} />
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <div className='bg-lightBackground p-5 flex justify-center items-center font-semibold text-lightText text-3xl '>
-              <div className='px-5'>
-                <div className='flex w-full gap-2'>
-
-                  <div className='w-2/5 flex justify-around items-center'>
-                    <img src={buildingRoof} className='w-64 rounded-lg' alt="" />
-                  </div>
-
-                  <div className='w-3/5  flex flex-col justify-center items-center px-10 py-10 text-base'>
-                    <h3 className='text-3xl font-semibold mb-4'>
-                      How It Works?
-                    </h3>
-                    <p className='text-2xl'>
-                      A simple, step-by-step explanation of the platform’s process:
-                    </p>
-                    <ol className='list-decimal list-inside space-y-2 text-xl mt-2'>
-                      <li>Choose a Service: Browse or search for the service you need.</li>
-                      <li>Select a Professional: Review ratings, read reviews, and choose from verified professionals.</li>
-                      <li>Book an Appointment: Schedule a time that’s convenient for you.</li>
-                      <li>Get the Job Done: Enjoy high-quality service with transparent pricing.</li>
-                    </ol>
-                    <p className='text-xl mt-4 opacity-50'>
-                      *All transactions are secure and hassle-free, with no hidden fees.
-                    </p>
-
-                    <div className='mt-5 flex justify-start w-full'>
-                      <NavLink className=' p-2 text-xl bg-NavLinkBackground font-thin  text-NavLinkText rounded-lg hover:bg-NavLinkHover border-[1px] border-[#fafafa] hover:text-NavLinkBackground'>Know More</NavLink>
+                    <div className='w-2/5 flex justify-around items-center'>
+                      <img src={buildingRoof} className='w-64 rounded-lg' alt="" />
                     </div>
 
+                    <div className='w-3/5  flex flex-col justify-center items-center px-10 py-10 text-base'>
+                      <h3 className='text-3xl font-semibold mb-4'>
+                        How It Works?
+                      </h3>
+                      <p className='text-2xl'>
+                        A simple, step-by-step explanation of the platform’s process:
+                      </p>
+                      <ol className='list-decimal list-inside space-y-2 text-xl mt-2'>
+                        <li>Choose a Service: Browse or search for the service you need.</li>
+                        <li>Select a Professional: Review ratings, read reviews, and choose from verified professionals.</li>
+                        <li>Book an Appointment: Schedule a time that’s convenient for you.</li>
+                        <li>Get the Job Done: Enjoy high-quality service with transparent pricing.</li>
+                      </ol>
+                      <p className='text-xl mt-4 opacity-50'>
+                        *All transactions are secure and hassle-free, with no hidden fees.
+                      </p>
+
+                      <div className='mt-5 flex justify-start w-full'>
+                        <NavLink className=' p-2 text-xl bg-NavLinkBackground font-thin  text-NavLinkText rounded-lg hover:bg-NavLinkHover border-[1px] border-[#fafafa] hover:text-NavLinkBackground'>Know More</NavLink>
+                      </div>
+
+                    </div>
+
+
                   </div>
-
-
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
 
-          <section>
-            <div className='flex flex-col justify-center items-center bg-lighterBackground text-darkText p-10'>
+            <section>
+              <div className='flex flex-col justify-center items-center bg-[#F0F0F3] text-darkText p-10'>
 
-              <div className='flex justify-center items-center'>
-                <div>
-                  <h2 className='text-3xl font-semibold '>
-                    What Our Customers Say
-                  </h2>
-                  <div className={`mt-5 feedback ${fade ? 'feedback-exit' : 'feedback-enter'} border-4 rounded-2xl border-gray-700 p-4 `}>
-                    <p className='text-2xl'>
-                      <span className='text-8xl'>
-                        “
-                      </span>
-                      {feedbacks[currentFeedbackIndex]}
-                      {/* <span className='text-6xl'>
+                <div className='flex justify-center items-center'>
+                  <div>
+                    <h2 className='text-3xl font-semibold '>
+                      What Our Customers Say
+                    </h2>
+                    <div className={`mt-5 feedback ${fade ? 'feedback-exit' : 'feedback-enter'} border-4 rounded-2xl border-black p-4 `}>
+                      <p className='text-2xl'>
+                        <span className='text-8xl'>
+                          “
+                        </span>
+                        {feedbacks[currentFeedbackIndex]}
+                        {/* <span className='text-6xl'>
 
                         ”
                       </span> */}
+                      </p>
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <div className='flex gap-5 mt-5'>
+
+                  <button className='bg-NavLinkBackground text-NavLinkText hover:bg-NavLinkHover hover:text-black p-3 rounded-full' onClick={handlePrevious}>
+                    <GrFormPrevious className='text-3xl' />
+                  </button>
+
+                  <button className='bg-NavLinkBackground text-NavLinkText hover:bg-NavLinkHover hover:text-black p-3 rounded-full' onClick={handleNext}>
+                    <GrFormNext className='text-3xl' />
+                  </button>
+                </div>
+
+              </div>
+
+            </section>
+
+          </div>
+
+        </div>
+      </div>
+
+      {
+        serviceModal && (
+
+          <div className='fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 gap-4 z-50 flex justify-center items-center'>
+            <section className='px-72 py-16  flex justify-center items-center '>
+              <div
+                className=' h-3/4  rounded-3xl product-page-shadow flex  items-center p-5 gap-4 bg-white' >
+                <div className='w-1/2 h-[95%] rounded-3xl'>
+                  <img src={service} alt="" className='object-cover h-full rounded-3xl' />
+                </div>
+
+                <div className='flex flex-col justify-between items-start h-full w-1/2'>
+                  <div>
+
+                    <div className='mt-2'>
+                      <h1 className='text-4xl font-semibold'>
+                        Service Name with anything
+                      </h1>
+                    </div>
+                    <p className='text-md mt-2'>
+                      Air conditioner service ensures your cooling system operates efficiently, providing regular maintenance like cleaning filters, checking refrigerant levels, and inspecting electrical components. It prevents breakdowns, improves air quality, and extends the unit's lifespan. Professional technicians ensure optimal performance, keeping your home cool and comfortable, especially during hot weather.
                     </p>
+                  </div>
+                  <div className='w-full mt-2 flex justify-end items-center gap-4'>
+
+                    <p className='text-lg font-semibold mr-3'>
+                      ₹499/-
+                    </p>
+
+                    <button className='p-2 bg-black text-white text-[18px] whitespace-nowrap  transition-all duration-300 hover:scale-105 font-semibold rounded-xl'>
+                      Book Now
+                    </button>
+                    <button className='p-2 bg-transparent border-[1px] text-[18px] whitespace-nowrap transition-all duration-300 hover:scale-105 border-gray-700 text-black font-semibold rounded-xl'>
+                      Add to cart
+                    </button>
                   </div>
                 </div>
 
 
               </div>
 
-              <div className='flex gap-5 mt-5'>
 
-                <button className='bg-NavLinkBackground text-NavLinkText hover:bg-NavLinkHover hover:text-black p-3 rounded-full' onClick={handlePrevious}>
-                  <GrFormPrevious className='text-3xl' />
-                </button>
+            </section>
+          </div>
 
-                <button className='bg-NavLinkBackground text-NavLinkText hover:bg-NavLinkHover hover:text-black p-3 rounded-full' onClick={handleNext}>
-                  <GrFormNext className='text-3xl' />
-                </button>
-              </div>
+        )
+      }
+    </>
 
-            </div>
-
-          </section>
-
-        </div>
-
-      </div>
-
-
-    </div>
   )
 }
 

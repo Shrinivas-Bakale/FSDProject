@@ -6,6 +6,7 @@ import Login from './pages/Onboarding/Login'
 import Signup from './pages/Onboarding/Signup'
 import Example from './pages/firebase/example';
 import UserAuthentication from './pages/firebase/UserAuthentication'
+import ServicePage from './pages/ServicePage/ServicePage'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='signup' element={<Signup />} />
         <Route path="/" element={<Layout />} >
           <Route exact path="/" element={<Landing />} />
+          <Route exact path="/service" element={<ServicePage />} /> 
         </Route>
       </Routes>
     </Router>

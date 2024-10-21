@@ -11,8 +11,11 @@ import homePainting from "../assets/home-painting.webp";
 import spaAyurveda from "../assets/ayurveda-spa.webp";
 import hairStudio from "../assets/hair-studio-women.webp";
 import acRepair from "../assets/ac-repair-service.webp";
+import { useNavigate } from 'react-router-dom';
 
 const SliderHome = () => {
+
+    const navigate = useNavigate();
 
     const sliderContent = [
         {
@@ -110,9 +113,13 @@ const SliderHome = () => {
                 <div className='lg:w-11/12 lg:ml-10 md:w-11/12 md:ml-8 xl:w-full 2xl:w-full xl:px-8 xl:ml-2 2xl:px-12 '>
                     <Slider ref={sliderRef} {...settings}>
                         {sliderContent.map((item, index) => (
-                            <div className="flex flex-col justify-center items-start p-3" key={index}>
-                                <img src={item.img} alt="" className='rounded-2xl transform transition-transform duration-300 hover:scale-105' />
-                                <h5 className='font-semibold text-lg text-lightText mt-3'>{item.title}</h5>
+                            <div className="flex flex-col justify-center items-start p-3" key={index} >
+                                <button
+                                // onClick={() => navigate(`/services/${item.title}`)}
+                                >
+                                    <img src={item.img} alt="" className='rounded-2xl transform transition-transform duration-300 hover:scale-105' />
+                                    <h5 className='font-semibold text-lg text-lightText mt-3'>{item.title}</h5>
+                                </button>
                             </div>
 
                         ))}

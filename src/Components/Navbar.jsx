@@ -36,12 +36,12 @@ const Navbar = () => {
                                     {/* <BsWhatsapp className='text-xl' />
                                     <BsInstagram className='text-xl' /> */}
 
-                                    <NavLink className="underline-link">
+                                    {/* <NavLink className="underline-link">
                                         <h3>Beauty</h3>
                                     </NavLink>
                                     <NavLink className="underline-link">
                                         <h3>Homes</h3>
-                                    </NavLink>
+                                    </NavLink> */}
 
                                     <NavLink className="underline-link" to={"/login"}> Login</NavLink>
                                     <NavLink>

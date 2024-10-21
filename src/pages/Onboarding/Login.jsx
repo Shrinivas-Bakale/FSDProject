@@ -14,7 +14,13 @@ const Login = () => {
     const auth = getAuth(app)
 
 
-    const login = (e) => {
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * Function to log in a user using email and password.
+ * 
+ * @param {Event} e - The event object.
+ */
+/******  05506241-86c5-445c-8844-3e59482fac1f  *******/    const login = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword
             (auth, email, password,)
