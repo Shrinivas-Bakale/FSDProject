@@ -2,6 +2,7 @@ import React from 'react'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import toast, { Toaster } from 'react-hot-toast';
 import { app } from '../firebase/firebase'
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
 
@@ -9,6 +10,8 @@ const Signup = () => {
   const [password, setPassword] = React.useState('');
 
   const auth = getAuth(app)
+
+  const navigate = useNavigate();
 
 
   const signup = (e) => {
@@ -18,6 +21,9 @@ const Signup = () => {
       .then((userCredentials) => {
         console.log(userCredentials)
         toast.success("User Created")
+        setTimeout(() => {
+          navigate('/login')
+        }, 700)
       })
       .catch((error) => {
         console.log(error)

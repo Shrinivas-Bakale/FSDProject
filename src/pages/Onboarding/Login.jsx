@@ -10,22 +10,21 @@ const Login = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
 
+
+    const navigate = useNavigate()
+
     const auth = getAuth(app)
 
-
-/*************  ✨ Codeium Command ⭐  *************/
-/**
- * Function to log in a user using email and password.
- * 
- * @param {Event} e - The event object.
- */
-/******  05506241-86c5-445c-8844-3e59482fac1f  *******/    const login = (e) => {
+    const login = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword
             (auth, email, password,)
             .then((userCredentials) => {
                 console.log(userCredentials)
                 toast.success("Logged In Successfully")
+                setTimeout(() => {
+                    navigate('/')
+                }, 700)
             })
             .catch((error) => {
                 console.log(error)
@@ -33,7 +32,6 @@ const Login = () => {
             })
     }
 
-    const navigate = useNavigate()
 
 
     return (
