@@ -7,6 +7,7 @@ import Signup from './pages/Onboarding/Signup'
 import Example from './pages/firebase/example';
 import UserAuthentication from './pages/firebase/UserAuthentication'
 import ServicePage from './pages/ServicePage/ServicePage'
+import CategoryPage from './pages/ServicePage/CategoryPage'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Layout />} >
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/service" element={<ServicePage />} /> 
+          <Route exact path="/category" element={<CategoryPage />} />
         </Route>
       </Routes>
     </Router>

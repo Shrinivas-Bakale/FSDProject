@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from "../../assets/service-logo-template-design-vector_20029-567.avif"
 import { useNavigate } from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import toast, { Toaster } from 'react-hot-toast';

@@ -115,7 +115,7 @@ const SliderHome = () => {
                         {sliderContent.map((item, index) => (
                             <div className="flex flex-col justify-center items-start p-3" key={index} >
                                 <button
-                                // onClick={() => navigate(`/services/${item.title}`)}
+                                onClick={() => navigate(`/category`)}
                                 >
                                     <img src={item.img} alt="" className='rounded-2xl transform transition-transform duration-300 hover:scale-105' />
                                     <h5 className='font-semibold text-lg text-lightText mt-3'>{item.title}</h5>

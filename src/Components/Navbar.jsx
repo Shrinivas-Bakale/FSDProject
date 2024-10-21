@@ -1,12 +1,13 @@
 import React from 'react'
 import logo from "../assets/service-logo-template-design-vector_20029-567.avif"
 import { IoCartOutline } from "react-icons/io5";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { BsInstagram } from "react-icons/bs";
 import { BsWhatsapp } from "react-icons/bs";
 
 
 const Navbar = () => {
+    const navigate = useNavigate();
     return (
         <>
             <div className=' bg-lightBackground sticky top-0 z-50'>
@@ -16,9 +17,12 @@ const Navbar = () => {
                             <div className='flex justify-between items-center text-[#f6f3ec] p-1 px-10 text-xl'>
                                 <div className='logo flex gap-9 items-center'>
                                     {/* <img src={logo} alt="" className='w-20' /> */}
-                                    <h1 className='main-logo text-[38px] mt-3'>
-                                        Nexenstial
-                                    </h1>
+                                    <button onClick={() => navigate("/")}>
+
+                                        <h1 className='main-logo text-[38px] mt-3'>
+                                            Nexenstial
+                                        </h1>
+                                    </button>
                                     <div className='flex gap-5 items-center '>
 
 
