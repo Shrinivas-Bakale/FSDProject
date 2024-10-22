@@ -72,7 +72,8 @@ const CategoryPage = () => {
                                                 <div className='w-1/4 p-2 '>
                                                     <div className='mr-4 mt-5 relative'>
                                                         <img src={SideImage} className='w-full h-full rounded-xl' alt="" />
-                                                        <button className='absolute  -bottom-5  left-10 text-[#955CFF] rounded-xl flex justify-center items-center border-[1px] border-gray-300 bg-gray-200 mx-auto w-12 py-2 px-9'>
+                                                        {/* text-[#955CFF] */}
+                                                        <button className='absolute  -bottom-5  left-10 text-black  rounded-xl flex justify-center items-center border-[1px] border-gray-300 bg-gray-200 mx-auto w-12 py-2 px-9'>
                                                             Add
                                                         </button>
                                                     </div>

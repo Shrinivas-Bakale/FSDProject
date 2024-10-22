@@ -90,19 +90,7 @@ const Login = () => {
 
                         </div>
 
-                        <div className="mt-4 w-full px-4 flex items-center justify-between">
-                            <hr className="flex-grow border-t border-gray-400" />
-
-                            <p className="px-4 text-gray-500">or</p>
-
-                            <hr className="flex-grow border-t border-gray-400" />
-                        </div>
-
-                        <div className='flex justify-center'>
-                            <div>
-                                Sign in with Google
-                            </div>
-                        </div>
+                        
 
                         <div className='flex justify-center mt-4 gap-2'>
 

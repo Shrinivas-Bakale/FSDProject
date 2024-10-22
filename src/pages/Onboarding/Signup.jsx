@@ -1,8 +1,9 @@
 import React from 'react'
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import toast, { Toaster } from 'react-hot-toast';
 import { app } from '../firebase/firebase'
 import { useNavigate } from 'react-router-dom';
+import { FaGoogle } from "react-icons/fa";
 
 const Signup = () => {
 
@@ -12,6 +13,7 @@ const Signup = () => {
   const auth = getAuth(app)
 
   const navigate = useNavigate();
+  const googleProvider = new GoogleAuthProvider();
 
 
   const signup = (e) => {
@@ -25,6 +27,20 @@ const Signup = () => {
           navigate('/login')
         }, 700)
       })
+      .catch((error) => {
+        console.log(error)
+        toast.error(error.message)
+      })
+  }
+
+  const signUpWithGoogle = () => {
+    signInWithPopup(auth, googleProvider).then((result) => {
+      console.log(result)
+      toast.success("Signed up with Google.")
+      setTimeout(() => {
+        navigate('/login')
+      }, 700)
+    })
       .catch((error) => {
         console.log(error)
         toast.error(error.message)
@@ -91,6 +107,25 @@ const Signup = () => {
                   </div>
                 </form>
 
+
+                <div className="mt-4 w-full px-4 flex items-center justify-between">
+                  <hr className="flex-grow border-t border-gray-400" />
+
+                  <p className="px-4 text-gray-500">or</p>
+
+                  <hr className="flex-grow border-t border-gray-400" />
+                </div>
+
+                <div className='flex justify-center'>
+                  <div className='mt-4 w-full '>
+                    <button
+                      onClick={signUpWithGoogle}
+                      className='w-full p-2 rounded-lg flex items-center justify-center hover:bg-NavLinkHover hover:text-black text-NavLinkText bg-NavLinkBackground'>
+                      <FaGoogle className='mr-3' />
+                      Sign in with Google
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
