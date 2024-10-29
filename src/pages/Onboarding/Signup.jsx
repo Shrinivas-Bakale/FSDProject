@@ -1,16 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import toast, { Toaster } from 'react-hot-toast';
-import { app } from '../firebase/firebase'
+import { firebaseApp } from '../firebase/Firebase'
 import { useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
+import { FaRegEye } from 'react-icons/fa'
+import { FaRegEyeSlash } from 'react-icons/fa'
 
 const Signup = () => {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
-  const auth = getAuth(app)
+  const auth = getAuth(firebaseApp)
 
   const navigate = useNavigate();
   const googleProvider = new GoogleAuthProvider();
@@ -64,7 +67,7 @@ const Signup = () => {
 
                 <div>
                   <h1 className='main-logo text-3xl mt-1'>
-                    Nexenstial
+                    Nexesential
                   </h1>
                 </div>
 
@@ -85,17 +88,21 @@ const Signup = () => {
                       className='p-2 rounded-lg mt-2 w-full' />
                   </div>
 
-                  <div className='mt-4 w-full'>
-                    <h2 className='text-2xl'>
-                      Password
-                    </h2>
-                    <input type="password"
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                      }}
-                      placeholder='Password'
-                      className='p-2 rounded-lg mt-2 w-full' />
-                  </div>
+                  <div className='relative'>
+                                        <button type='button' className='absolute right-0 top-4 ' onClick={() => setShowPassword(!showPassword)}>
+                                            {!showPassword ?
+                                                <FaRegEye className='w-10 h-5' />
+                                                :
+                                                <FaRegEyeSlash className='w-10 h-5' />
+                                            }
+                                        </button>
+                                        <input type={showPassword ? "text" : "password"}
+                                            onChange={(e) => {
+                                                setPassword(e.target.value);
+                                            }}
+                                            placeholder='Password'
+                                            className='p-2 rounded-lg mt-2 w-full' />
+                                    </div>
 
                   <div className='mt-4 w-full'>
                     <button

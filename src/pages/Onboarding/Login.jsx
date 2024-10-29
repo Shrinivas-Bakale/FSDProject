@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import toast, { Toaster } from 'react-hot-toast';
-import { app } from '../firebase/firebase'
+import { firebaseApp } from '../firebase/Firebase'
+import { FaRegEye } from 'react-icons/fa'
+import { FaRegEyeSlash } from 'react-icons/fa'
 
 const Login = () => {
-
-
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
 
     const navigate = useNavigate()
 
-    const auth = getAuth(app)
+    const auth = getAuth(firebaseApp)
 
     const login = (e) => {
         e.preventDefault();
@@ -50,7 +51,7 @@ const Login = () => {
 
                             <div>
                                 <h1 className='main-logo text-3xl mt-1'>
-                                    Nexenstial
+                                    Nexesential
                                 </h1>
                             </div>
 
@@ -75,12 +76,21 @@ const Login = () => {
                                     <h2 className='text-2xl'>
                                         Password
                                     </h2>
-                                    <input type="password"
-                                        onChange={(e) => {
-                                            setPassword(e.target.value);
-                                        }}
-                                        placeholder='Password'
-                                        className='p-2 rounded-lg mt-2 w-full' />
+                                    <div className='relative'>
+                                        <button type='button' className='absolute right-0 top-4 ' onClick={() => setShowPassword(!showPassword)}>
+                                            {!showPassword ?
+                                                <FaRegEye className='w-10 h-5' />
+                                                :
+                                                <FaRegEyeSlash className='w-10 h-5' />
+                                            }
+                                        </button>
+                                        <input type={showPassword ? "text" : "password"}
+                                            onChange={(e) => {
+                                                setPassword(e.target.value);
+                                            }}
+                                            placeholder='Password'
+                                            className='p-2 rounded-lg mt-2 w-full' />
+                                    </div>
                                 </div>
 
                                 <div className='mt-4 w-full'>
@@ -90,7 +100,7 @@ const Login = () => {
 
                         </div>
 
-                        
+
 
                         <div className='flex justify-center mt-4 gap-2'>
 

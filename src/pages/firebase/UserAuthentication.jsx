@@ -1,8 +1,8 @@
 import React from 'react'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
-import { app } from './firebase'
+import { firebaseApp } from './Firebase'
 
-const auth = getAuth(app)
+const auth = getAuth(firebaseApp)
 const UserAuthentication = () => {
 
     const signup = () => {

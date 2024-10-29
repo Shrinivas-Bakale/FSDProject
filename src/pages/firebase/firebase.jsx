@@ -1,5 +1,9 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// import { getAnalytics } from "firebase/analytics";
+import { createContext, useContext } from "react";
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
+import { getDatabase, set, ref } from "firebase/database";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyA0w1Lc8tB1oeN4BV_ov835egfjm1uptjg",
@@ -11,8 +15,29 @@ const firebaseConfig = {
     measurementId: "G-FN29YW4ZTW",
     databaseURL: "https://fsdproject-2f44c-default-rtdb.firebaseio.com/"
 };
-
-export const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
+
+
+export const firebaseApp = initializeApp(firebaseConfig);
+const firebaseAuth = getAuth(firebaseApp);
+export const FirebaseContext = createContext(null);
+const database = getDatabase(firebaseApp);
+export const useFirebase = () => useContext(FirebaseContext);
+
+export const FirebaseProvider = (props) => {
+    const signUpUsingEmailAndPassword = (email, password) => {
+        return createUserWithEmailAndPassword(firebaseAuth, email, password);
+    }
+
+    const putData = (key, data) => {
+        set(ref(database, key), data)
+    }
+
+    return (
+        <FirebaseContext.Provider value={{ signUpUsingEmailAndPassword, putData }}>
+            {props.children}
+        </FirebaseContext.Provider>
+    )
+}
 
 

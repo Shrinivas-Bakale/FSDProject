@@ -1,10 +1,10 @@
 import React from 'react'
 import { getDatabase, ref, set } from 'firebase/database'
-import { app } from '../../pages/firebase/firebase'
+import { firebaseApp } from '../../pages/firebase/Firebase'
 
 const Example = () => {
 
-    const db = getDatabase(app)
+    const db = getDatabase(firebaseApp)
 
     const writeUserData = () => {
         console.log("Hello")

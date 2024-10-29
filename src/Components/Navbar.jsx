@@ -1,13 +1,34 @@
-import React from 'react'
-import logo from "../assets/service-logo-template-design-vector_20029-567.avif"
+import React, { useEffect, useState } from 'react'
+// import logo from "../assets/service-logo-template-design-vector_20029-567.avif"
 import { IoCartOutline } from "react-icons/io5";
 import { NavLink, useNavigate } from 'react-router-dom';
-import { BsInstagram } from "react-icons/bs";
-import { BsWhatsapp } from "react-icons/bs";
+// import { BsInstagram } from "react-icons/bs";
+// import { BsWhatsapp } from "react-icons/bs";
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+import { firebaseApp } from '../pages/firebase/Firebase';
 
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const [loginButtonVisibility, setLoginButtonVisibility] = useState(true)
+    const [user, setUser] = useState(null);
+
+    const auth = getAuth(firebaseApp);
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setLoginButtonVisibility(false)
+                setUser(user)
+                console.log(user)
+            }
+            else {
+                setLoginButtonVisibility(true)
+                setUser(null)
+            }
+        })
+    }, [])
+
     return (
         <>
             <div className=' bg-lightBackground sticky top-0 z-50'>
@@ -20,13 +41,10 @@ const Navbar = () => {
                                     <button onClick={() => navigate("/")}>
 
                                         <h1 className='main-logo text-[38px] mt-3'>
-                                            Nexenstial
+                                            Nexesential
                                         </h1>
                                     </button>
                                     <div className='flex gap-5 items-center '>
-
-
-
 
                                     </div>
                                 </div>
@@ -46,8 +64,11 @@ const Navbar = () => {
                                     <NavLink className="underline-link">
                                         <h3>Homes</h3>
                                     </NavLink> */}
-
-                                    <NavLink className="underline-link" to={"/login"}> Login</NavLink>
+                                    {
+                                        loginButtonVisibility ?
+                                            <NavLink className="underline-link" to={"/login"}> Login</NavLink>
+                                            : <button onClick={() => { signOut(auth) }}>Logout</button>
+                                    }
                                     <NavLink>
                                         <IoCartOutline className='text-3xl' />
                                     </NavLink>

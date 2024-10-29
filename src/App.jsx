@@ -9,6 +9,7 @@ import UserAuthentication from './pages/firebase/UserAuthentication'
 import ServicePage from './pages/ServicePage/ServicePage'
 import CategoryPage from './pages/ServicePage/CategoryPage'
 
+
 function App() {
   return (
     <Router>
