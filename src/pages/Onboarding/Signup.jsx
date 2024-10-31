@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import toast, { Toaster } from 'react-hot-toast';
-import { firebaseApp } from '../firebase/Firebase'
+import { firebaseApp } from '../firebase/firebase'
 import { useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import { FaRegEye } from 'react-icons/fa'
@@ -41,7 +41,7 @@ const Signup = () => {
       console.log(result)
       toast.success("Signed up with Google.")
       setTimeout(() => {
-        navigate('/login')
+        navigate('/')
       }, 700)
     })
       .catch((error) => {

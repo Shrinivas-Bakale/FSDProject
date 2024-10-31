@@ -1,6 +1,6 @@
 import React from 'react'
 import { getDatabase, ref, set } from 'firebase/database'
-import { firebaseApp } from '../../pages/firebase/Firebase'
+import { firebaseApp } from '../../pages/firebase/firebase'
 
 const Example = () => {
 

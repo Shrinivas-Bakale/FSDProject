@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import toast, { Toaster } from 'react-hot-toast';
-import { firebaseApp } from '../firebase/Firebase'
+import { firebaseApp } from '../firebase/firebase'
 import { FaRegEye } from 'react-icons/fa'
 import { FaRegEyeSlash } from 'react-icons/fa'
+import { FaGoogle } from "react-icons/fa";
+
 
 const Login = () => {
     const [email, setEmail] = React.useState('');
@@ -15,6 +17,9 @@ const Login = () => {
     const navigate = useNavigate()
 
     const auth = getAuth(firebaseApp)
+
+
+  const googleProvider = new GoogleAuthProvider();
 
     const login = (e) => {
         e.preventDefault();
@@ -27,6 +32,20 @@ const Login = () => {
                     navigate('/')
                 }, 700)
             })
+            .catch((error) => {
+                console.log(error)
+                toast.error(error.message)
+            })
+    }
+
+    const signUpWithGoogle = () => {
+        signInWithPopup(auth, googleProvider).then((result) => {
+            console.log(result)
+            toast.success("Signed up with Google.")
+            setTimeout(() => {
+                navigate('/')
+            }, 700)
+        })
             .catch((error) => {
                 console.log(error)
                 toast.error(error.message)
@@ -61,21 +80,25 @@ const Login = () => {
                             <form action="" onSubmit={login}>
 
                                 <div className='mt-4 w-full'>
-                                    <h2 className='text-2xl'>
+                                    <label htmlFor='email' className='text-2xl'>
                                         Email
-                                    </h2>
-                                    <input type="text"
+                                    </label>
+                                    <input type="email"
+                                        id='email'
+                                        name='email'
                                         onChange={(e) => {
                                             setEmail(e.target.value);
                                         }}
                                         placeholder='Email'
-                                        className='p-2 rounded-lg mt-2 w-full' />
+                                        className='p-2 rounded-lg mt-2 w-full'
+                                        autoComplete="email"
+                                    />
                                 </div>
 
                                 <div className='mt-4 w-full'>
-                                    <h2 className='text-2xl'>
+                                    <label htmlFor='password' className='text-2xl'>
                                         Password
-                                    </h2>
+                                    </label>
                                     <div className='relative'>
                                         <button type='button' className='absolute right-0 top-4 ' onClick={() => setShowPassword(!showPassword)}>
                                             {!showPassword ?
@@ -85,11 +108,16 @@ const Login = () => {
                                             }
                                         </button>
                                         <input type={showPassword ? "text" : "password"}
+                                            name='password'
+                                            id='password'
+
                                             onChange={(e) => {
                                                 setPassword(e.target.value);
                                             }}
                                             placeholder='Password'
-                                            className='p-2 rounded-lg mt-2 w-full' />
+                                            className='p-2 rounded-lg mt-2 w-full'
+                                            autoComplete='current-password'
+                                        />
                                     </div>
                                 </div>
 
@@ -100,7 +128,24 @@ const Login = () => {
 
                         </div>
 
+                        <div className="mt-4 w-full px-4 flex items-center justify-between">
+                            <hr className="flex-grow border-t border-gray-400" />
 
+                            <p className="px-4 text-gray-500">or</p>
+
+                            <hr className="flex-grow border-t border-gray-400" />
+                        </div>
+
+                        <div className='flex justify-center'>
+                            <div className='mt-4 w-full '>
+                                <button
+                                    onClick={signUpWithGoogle}
+                                    className='w-full p-2 rounded-lg flex items-center justify-center hover:bg-NavLinkHover hover:text-black text-NavLinkText bg-NavLinkBackground'>
+                                    <FaGoogle className='mr-3' />
+                                    Sign in with Google
+                                </button>
+                            </div>
+                        </div>
 
                         <div className='flex justify-center mt-4 gap-2'>
 
