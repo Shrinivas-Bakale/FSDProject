@@ -161,3 +161,11 @@ body {
 .product-page-shadow {
   box-shadow: -10px -10px 30px #ffffff, 10px 10px 30px rgba(174, 174, 192, 0.4);
 }
+
+.typical-btn {
+  padding: 8px;
+  border-width: 2px;
+  margin: 8px;
+  border-color: black;
+  border-radius: 8px;
+}

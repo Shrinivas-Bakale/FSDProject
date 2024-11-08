@@ -1,8 +1,7 @@
 import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-import { createContext, useContext } from "react";
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
-import { getDatabase, set, ref } from "firebase/database";
+import { createContext, useContext, useEffect, useState } from "react";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getDatabase, set, ref, get, child } from "firebase/database";
 
 
 const firebaseConfig = {
@@ -15,13 +14,12 @@ const firebaseConfig = {
     measurementId: "G-FN29YW4ZTW",
     databaseURL: "https://fsdproject-2f44c-default-rtdb.firebaseio.com/"
 };
-// const analytics = getAnalytics(app);
 
 
 export const firebaseApp = initializeApp(firebaseConfig);
-const firebaseAuth = getAuth(firebaseApp);
+export const firebaseAuth = getAuth(firebaseApp);
 export const FirebaseContext = createContext(null);
-const database = getDatabase(firebaseApp);
+export const database = getDatabase(firebaseApp);
 export const useFirebase = () => useContext(FirebaseContext);
 
 export const FirebaseProvider = (props) => {
@@ -29,12 +27,51 @@ export const FirebaseProvider = (props) => {
         return createUserWithEmailAndPassword(firebaseAuth, email, password);
     }
 
-    const putData = (key, data) => {
+    const putData = (key, data, success, fail) => {
         set(ref(database, key), data)
+            .then(() => {
+                console.log(success)
+            })
+            .catch(() => {
+                console.log(fail)
+            })
     }
 
+    const getDataFromRTDB = (key, successCallback, failCallback) => {
+        get(child(ref(database), key))
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    console.log(snapshot.val()); // Log the retrieved data
+                    if (successCallback) {
+                        successCallback(snapshot.val()); // Call the success callback if it exists
+                    }
+                } else {
+                    console.log("No data available");
+                    if (failCallback) {
+                        failCallback("No data available");
+                    }
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching data:", error);
+                if (failCallback) {
+                    failCallback(error);
+                }
+            });
+    };
+
+    const [user, setuser] = useState(null)
+
+    useEffect(() => {
+        onAuthStateChanged(firebaseAuth, (user) => {
+            user ? setuser(user) : setuser(null)
+        })
+
+    }, [])
+
+
     return (
-        <FirebaseContext.Provider value={{ signUpUsingEmailAndPassword, putData }}>
+        <FirebaseContext.Provider value={{ signUpUsingEmailAndPassword, putData, user, getDataFromRTDB }}>
             {props.children}
         </FirebaseContext.Provider>
     )

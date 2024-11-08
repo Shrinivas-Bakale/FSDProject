@@ -1,23 +1,94 @@
 import React from 'react'
-import { getDatabase, ref, set } from 'firebase/database'
-import { firebaseApp } from '../../pages/firebase/firebase'
+import { firebaseApp, database, useFirebase } from '../../pages/firebase/firebase'
+import { getFirestore, collection, addDoc, doc, getDoc, query, where, getDocs, updateDoc } from 'firebase/firestore'
 
 const Example = () => {
 
-    const db = getDatabase(firebaseApp)
+    const firestore = getFirestore(firebaseApp)
+    const { putData } = useFirebase()
+    const { getDataFromRTDB } = useFirebase()
+
+    console.log(database)
+
 
     const writeUserData = () => {
-        console.log("Hello")
-        set(ref(db, 'users/shinu/'), {
-            id: 1,
+        return putData('users/shinu', {
+            id: 2,
             name: 'shrinivas',
-            age: 21
+            age: 22
+        }, "Successfully saved", "Failed to save")
+    }
+
+    const writeData = async () => {
+        const result = await addDoc(collection(firestore, 'cities'), {
+            name: 'Delhi',
+            pincode: 67,
+            lat: 123,
+            long: 456,
+        });
+        console.log('Result: ', result)
+    }
+
+    const writeSubData = async () => {
+        const result = await addDoc(collection(firestore, 'cities/JptDd6ZX58oIAivwLYfY/places'), {
+            name: 'This is a place 2',
+            desc: 'awsm',
+            date: Date.now(),
+        })
+        console.log('Result: ', result)
+    }
+
+    const getDocument = async () => {
+        const ref = doc(firestore, 'cities', 'JptDd6ZX58oIAivwLYfY');
+        const docSnap = await getDoc(ref);
+
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+        } else {
+            console.log("No such document!");
+        }
+    }
+
+
+    const getDocumentsByQuery = async () => {
+        const collectionRef = collection(firestore, 'users');
+        const q = query(collectionRef, where('isMale', '==', true));
+        const querySnapshot = await getDocs(q)
+        querySnapshot.forEach((data) => { console.log(data.data()) })
+    }
+
+    const updateDocument = async () => {
+        const docRef = doc(firestore, 'cities', 'JptDd6ZX58oIAivwLYfY');
+        await updateDoc(docRef, {
+            name: 'New Delhi'
         })
     }
 
+
+    const putDataNew = () => {
+        putData('root/a/b', { id: 1 });
+    }
+
+
+    const getDataRTDB = () => {
+        getDataFromRTDB(
+            'users/shinu',
+            (data) => console.log("Successfully retrieved data:", data),
+            (error) => console.log("Failed to retrieve data:", error)
+        );
+    };
+
+
     return (
         <div>
-            <button onClick={ writeUserData}>Put Data</button>
+            <button onClick={writeData} className='typical-btn'>Firestore Data</button>
+            <button onClick={writeSubData} className='typical-btn'>Firestore Sub Data</button>
+            <button onClick={getDocument} className='typical-btn'>Get Data</button>
+            <button onClick={getDocumentsByQuery} className='typical-btn'>Get Data By Query</button>
+            <button onClick={updateDocument} className='typical-btn'>Update Doc By Id</button>
+            <button onClick={writeUserData} className='typical-btn'>Database Data</button>
+            <button onClick={putDataNew} className='typical-btn'>RealTime DataBase</button>
+            <button onClick={getDataRTDB} className='typical-btn'>Get RealTime DataBase</button>
         </div>
     )
 }

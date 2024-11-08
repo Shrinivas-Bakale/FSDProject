@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 // import { BsInstagram } from "react-icons/bs";
 // import { BsWhatsapp } from "react-icons/bs";
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
-import { firebaseApp } from '../pages/firebase/firebase';
+import { firebaseApp, useFirebase } from '../pages/firebase/firebase';
 import { FaUser } from 'react-icons/fa'
 
 
@@ -30,6 +30,9 @@ const Navbar = () => {
             }
         })
     }, [])
+
+    const FirebaseContext = useFirebase()
+    console.log(FirebaseContext.user)
 
     const userDropdownRef = useRef()
 

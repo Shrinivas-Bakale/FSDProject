@@ -2,13 +2,19 @@ import React, { useEffect, useRef, useState } from 'react'
 import SideImage from "../../assets/login-bg.jpg"
 import { useNavigate } from 'react-router-dom'
 import service from '../../assets/login-bg.jpg'
+import { firebaseApp } from '../firebase/firebase'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { Toaster,toast } from 'react-hot-toast'
+
 
 const CategoryPage = () => {
 
     const navigate = useNavigate()
     const [serviceModal, setserviceModal] = useState(false);
+    const [userState, setUserState] = useState()
 
     const serviceModalRef = useRef(null);
+    const auth = getAuth(firebaseApp)
 
     const handleClickOutside = (event) => {
         if (serviceModalRef.current && !serviceModalRef.current.contains(event.target)) {
@@ -28,6 +34,31 @@ const CategoryPage = () => {
         };
     }, []);
 
+
+
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserState(true)
+            } else {
+                setUserState(false)
+            }
+        })
+    }, [])
+
+    const handleBooking = () => {
+        if (userState) {
+            console.log("got here")
+        } else {
+            toast('You need to login before booking!', {
+                icon: '⚠️'
+            });
+            setTimeout(() => {
+                navigate('/login')
+            }, 700)
+        }
+    }
 
     return (
         <>
@@ -167,7 +198,9 @@ const CategoryPage = () => {
                                             ₹499/-
                                         </p>
 
-                                        <button className='p-2 bg-black text-white text-[18px] whitespace-nowrap  transition-all duration-300 hover:scale-105 font-semibold rounded-xl'>
+                                        <button className='p-2 bg-black text-white text-[18px] whitespace-nowrap  transition-all duration-300 hover:scale-105 font-semibold rounded-xl'
+                                            onClick={handleBooking}
+                                        >
                                             Book Now
                                         </button>
                                         <button className='p-2 bg-transparent border-[1px] text-[18px] whitespace-nowrap transition-all duration-300 hover:scale-105 border-gray-700 text-black font-semibold rounded-xl'>
