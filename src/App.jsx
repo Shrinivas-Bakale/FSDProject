@@ -9,6 +9,7 @@ import UserAuthentication from './pages/firebase/UserAuthentication'
 import ServicePage from './pages/ServicePage/ServicePage'
 import CategoryPage from './pages/ServicePage/CategoryPage'
 import PersistLogin from './Auth/PersistLogin'
+import Category from './pages/ServicePage/Category'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/service" element={<ServicePage />} />
           <Route exact path="/category" element={<CategoryPage />} />
+          <Route exact path="/category1" element={<Category />} />
         </Route>
       </Routes>
     </Router>

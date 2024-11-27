@@ -1,6 +1,7 @@
 import express from "express";
 import {
   create,
+  deleteServiceById,
   getAllServices,
   getServiceById,
   updateServiceById,
@@ -12,5 +13,6 @@ router.post("/create", create);
 router.get("/getAllServices", getAllServices);
 router.get("/getServiceById/:id", getServiceById);
 router.put("/updateServiceById/:id", updateServiceById);
+router.delete("/deleteServiceById/:id", deleteServiceById);
 
 export default router;

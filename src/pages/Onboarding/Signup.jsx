@@ -129,7 +129,7 @@ const Signup = () => {
                       onClick={signUpWithGoogle}
                       className='w-full p-2 rounded-lg flex items-center justify-center hover:bg-NavLinkHover hover:text-black text-NavLinkText bg-NavLinkBackground'>
                       <FaGoogle className='mr-3' />
-                      Sign in with Google
+                      Sign up with Google
                     </button>
                   </div>
                 </div>

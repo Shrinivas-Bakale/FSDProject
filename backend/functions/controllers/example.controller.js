@@ -70,5 +70,21 @@ export const updateServiceById = async (req, res) => {
   }
 };
 
+export const deleteServiceById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const serviceRef = db.collection("services").doc(id);
+    const docSnapshot = await serviceRef.get();
 
+    if (!docSnapshot.exists) {
+      return res.status(404).send({ message: "Service not found" });
+    }
 
+    await serviceRef.delete();
+
+    return res.status(200).send({ message: "Service deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting service:", error);
+    return res.status(500).send({ error: "Failed to delete service" });
+  }
+};
