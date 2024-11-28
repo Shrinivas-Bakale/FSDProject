@@ -3,16 +3,14 @@ import { NavLink } from 'react-router-dom'
 
 const Footer = () => {
     return (
-        <div className=' bg-black  z-50 border-t-[1px] border-[#36302a]'>
-            <div className='container mx-auto '>
-                <div className='grid grid-cols-1'>
-                    <div className='flex justify-start items-center p-10'>
-                        <div className='flex flex-col text-lightText'>
+        <div className="bg-black z-50 border-t border-[#36302a]">
+            <div className="container mx-auto">
+                <div className="grid grid-cols-1">
+                    <div className="flex justify-start items-center p-3">
+                        <div className="flex flex-col text-lightText">
                             <h2 className='text-3xl '>
                                 Contact Us
                             </h2>
-
-                            <br />
 
                             <p>123 Demo Street, New York, NY 12345</p>
 

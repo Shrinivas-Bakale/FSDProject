@@ -10,6 +10,9 @@ import ServicePage from './pages/ServicePage/ServicePage'
 import CategoryPage from './pages/ServicePage/CategoryPage'
 import PersistLogin from './Auth/PersistLogin'
 import Category from './pages/ServicePage/Category'
+import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
+import PaymentSummary from './pages/PaymentSummary'
 
 
 function App() {
@@ -25,6 +28,9 @@ function App() {
           <Route exact path="/service" element={<ServicePage />} />
           <Route exact path="/category" element={<CategoryPage />} />
           <Route exact path="/category1" element={<Category />} />
+          <Route exact path="/cart" element={<Cart />} />
+          <Route exact path="/checkout/:id" element={<Checkout />} />
+          <Route exact path="/payment" element={<PaymentSummary />} />
         </Route>
       </Routes>
     </Router>

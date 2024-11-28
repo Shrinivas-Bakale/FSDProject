@@ -7,14 +7,19 @@ import { Toaster } from 'react-hot-toast';
 const Layout = () => {
     return (
         <>
-            <div>
+            <div className="min-h-screen flex flex-col">
                 <Toaster position="top-right" reverseOrder={false} />
-                <main>
+
+                {/* Main Content */}
+                <main className="flex-grow">
                     <Navbar />
                     <Outlet />
-                    <Footer />
                 </main>
+
+                {/* Footer */}
+                <Footer />
             </div>
+
         </>
     )
 }
