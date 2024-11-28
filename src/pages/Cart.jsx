@@ -38,7 +38,6 @@ const Cart = () => {
                                                 Checkout
                                             </NavLink>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

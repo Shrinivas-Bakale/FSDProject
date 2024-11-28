@@ -89,7 +89,7 @@ const Navbar = () => {
                                             <NavLink className="underline-link" to={"/login"}> Login</NavLink>
                                             : null
                                     }
-                                    <NavLink>
+                                    <NavLink to={"/cart"}>
                                         <IoCartOutline className='text-3xl' />
                                     </NavLink>
                                     {loginButtonVisibility ?
