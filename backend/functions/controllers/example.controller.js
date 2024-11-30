@@ -2,12 +2,22 @@ import { db } from "../firebase.js";
 
 export const create = async (req, res) => {
   try {
-    const { id, name, description, price } = req.body;
-    if (!id || id.trim() === "") {
-      return res.status(400).send({ error: "Invalid or missing 'id' field" });
+    const { name, description, price } = req.body;
+
+    if (!name || !description || !price) {
+      return res.status(400).send({ error: "Missing required fields" });
     }
-    await db.collection("services").doc(id).set({ name, description, price });
-    return res.status(200).send({ message: "Service created successfully" });
+
+    // Automatically generate a document with a unique ID
+    const docRef = await db
+      .collection("services")
+      .add({ name, description, price });
+
+    // Respond with the generated ID
+    return res.status(200).send({
+      message: "Service created successfully",
+      id: docRef.id,
+    });
   } catch (error) {
     console.error("Error creating service:", error);
     return res.status(500).send({ error: "Failed to create service" });
