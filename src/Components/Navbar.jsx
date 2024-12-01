@@ -116,7 +116,7 @@ const Navbar = () => {
                                         </>
                                     }
 
-                                    <NavLink className=' p-4 text-xl bg-transparent text-NavLinkText rounded-lg hover:bg-NavLinkHover border-2 border-[#fafafa] hover:text-NavLinkBackground'>Get in touch</NavLink>
+                                    <NavLink className=' p-4 text-xl bg-transparent text-NavLinkText rounded-lg hover:bg-NavLinkHover border-2 border-[#fafafa] hover:text-NavLinkBackground' to={'/aboutus'}>Get in touch</NavLink>
 
 
                                     {profileDropdown &&

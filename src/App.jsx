@@ -22,6 +22,8 @@ import SmartLock from './pages/ServicePage/SmartLock'
 import SpaAyurveda from './pages/ServicePage/SpaAyurveda'
 import HairStudio from './pages/ServicePage/HairStudio'
 import ACRepair from './pages/ServicePage/ACRepair'
+import AboutUs from './pages/AboutUs';
+
 
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
         <Route path='example' element={<Example />} />
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<Signup />} />
+        <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/" element={<Layout />} >
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/service" element={<ServicePage />} />

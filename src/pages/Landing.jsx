@@ -11,7 +11,7 @@ import { PiUsersThreeLight } from "react-icons/pi";
 import SliderHome from './SliderHome'
 import Typewriter from 'typewriter-effect'
 import buildingRoof from "../assets/building-roof.jpeg"
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { GrFormNext } from "react-icons/gr";
 import { GrFormPrevious } from "react-icons/gr";
 import ServicePage from './ServicePage/ServicePage'
@@ -25,6 +25,7 @@ const Landing = () => {
   const [currentFeedbackIndex, setCurrentFeedbackIndex] = useState(0);
   const [fade, setFade] = useState(false);
   const [serviceModal, setServiceModal] = useState(false);
+  const navigate = useNavigate();
 
   const gridContent = [
     {
@@ -104,7 +105,7 @@ const Landing = () => {
                       Experience reliable, <br /> Professional solutions <br /> At your doorstep.
                     </h1>
 
-                    <button className='p-4 bg-transparent border-[1px] text-[18px] transition-all duration-300 hover:scale-105 border-gray-700 text-black font-semibold rounded-xl'>
+                    <button className='p-4 bg-transparent border-[1px] text-[18px] transition-all duration-300 hover:scale-105 border-gray-700 text-black font-semibold rounded-xl' onClick={() => navigate('/aboutus')}>
                       About Us
                     </button>
                     <button className='p-4 bg-black text-white text-[18px] ml-5 transition-all duration-300 hover:scale-105 font-semibold rounded-xl' onClick={() => window.scrollTo(768, 768)}>
@@ -172,9 +173,9 @@ const Landing = () => {
                         *All transactions are secure and hassle-free, with no hidden fees.
                       </p>
 
-                      <div className='mt-5 flex justify-start w-full'>
+                      {/* <div className='mt-5 flex justify-start w-full'>
                         <NavLink className=' p-2 text-xl bg-NavLinkBackground font-thin  text-NavLinkText rounded-lg hover:bg-NavLinkHover border-[1px] border-[#fafafa] hover:text-NavLinkBackground'>Know More</NavLink>
-                      </div>
+                      </div> */}
 
                     </div>
 
@@ -205,8 +206,6 @@ const Landing = () => {
                       </p>
                     </div>
                   </div>
-
-
                 </div>
 
                 <div className='flex gap-5 mt-5'>
@@ -229,7 +228,7 @@ const Landing = () => {
         </div>
       </div>
 
-      
+
     </>
 
   )
