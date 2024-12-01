@@ -5,6 +5,11 @@ import homePaintingBanner from '../../assets/homePainitingBanner.jpg'
 const HomePainiting = () => {
     const [homePainting, setHomePainting] = useState([]);
     const [mainHeading, setMainHeading] = useState('');
+
+    const specificCategory = homePainting["homePainting"];
+    const specificObject = specificCategory ? specificCategory[0] : null; // Get the first object or null
+    console.log(specificObject || null);
+
     const fetchAndCategorizeData = async () => {
         try {
             const response = await axios.get("http://127.0.0.1:5001/fsdproject-2f44c/us-central1/napi/api/example/getAllServices");
@@ -20,7 +25,10 @@ const HomePainiting = () => {
             }, {});
 
             console.log("Grouped by Category:", groupedByCategory);
-            setHomePainting(groupedByCategory)
+            setHomePainting(groupedByCategory);
+            setMainHeading(specificObject.mainHeading || null);
+            console.log(specificObject.mainHeading || null);
+
             // const { mainHeading, price, serviceHead } = diwaliLights[0] || {};
 
             // console.log("destructuring: ", mainHeading);
@@ -34,13 +42,10 @@ const HomePainiting = () => {
         }
     };
 
-    const specificCategory = homePainting["homePainting"];
-    const specificObject = specificCategory ? specificCategory[0] : null; // Get the first object or null
-    console.log(specificObject.mainHeading || null);
+
 
     useEffect(() => {
         fetchAndCategorizeData();
-        setMainHeading(specificObject.mainHeading || null);
     }, []);
 
 
