@@ -1,6 +1,6 @@
-import { db } from "../firebase.js";
+const { db } = require("../firebase.js");
 
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
   try {
     const { email, name, phone, pincode, address, gender } = req.body;
 
@@ -41,7 +41,7 @@ export const createUser = async (req, res) => {
   }
 };
 
-export const getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
   try {
     const querySnapshot = await db.collection("users").get();
     if (querySnapshot.empty) {
@@ -58,7 +58,7 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-export const getUserById = async (req, res) => {
+const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
     const doc = await db.collection("users").doc(id).get();
@@ -70,4 +70,10 @@ export const getUserById = async (req, res) => {
     console.error("Error fetching service:", error);
     return res.status(500).send({ error: "Failed to fetch user" });
   }
+};
+
+module.exports = {
+  createUser,
+  getAllUsers,
+  getUserById
 };
