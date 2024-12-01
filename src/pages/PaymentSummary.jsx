@@ -1,7 +1,9 @@
 import React from 'react'
 
-const PaymentSummary = ({totalPrice}) => {
-    
+const PaymentSummary = ({ totalPrice }) => {
+
+    const service = totalPrice;
+
     return (
         <div className='border-2 border-gray-300 p-5 rounded-lg'>
             <div className='flex flex-col items-start gap-2 '>
@@ -14,7 +16,7 @@ const PaymentSummary = ({totalPrice}) => {
                             Services Total
                         </p>
                         <p>
-                            {totalPrice}
+                            {service}
                         </p>
                     </div>
                     <div className='flex justify-between w-full text-lg'>
@@ -22,7 +24,7 @@ const PaymentSummary = ({totalPrice}) => {
                             Taxes and Fee
                         </p>
                         <p>
-                            {totalPrice * 0.18}
+                            {service * 0.18}
                         </p>
                     </div>
                 </div>
@@ -33,7 +35,7 @@ const PaymentSummary = ({totalPrice}) => {
                             Total
                         </h3>
                         <p>
-                            {totalPrice + (totalPrice * 0.18)}
+                            {service + (service * 0.18)}
                         </p>
                     </div>
                 </div>

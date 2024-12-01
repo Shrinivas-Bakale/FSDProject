@@ -30,9 +30,9 @@ const Cart = () => {
         }
     };
 
-    
+
     const calculateTotal = (items) => {
-        const total = items.reduce((sum, item) => sum + (parseFloat(item.price) ), 0);
+        const total = items.reduce((sum, item) => sum + (parseFloat(item.price)), 0);
         setTotalPrice(total);
     };
     useEffect(() => {
@@ -92,15 +92,16 @@ const Cart = () => {
                                                 <h1 className='text-3xl'>{item.serviceHead}</h1>
                                                 <div>
                                                     {/* Display quantity and price */}
-                                                    <p className='text-lg'> Service • ₹{item.price}</p>
+                                                    <p className='text-lg'>  ₹{item.price}</p>
                                                 </div>
                                                 <div className="flex justify-center items-center w-full h-full">
                                                     {/* Checkout link for the specific item */}
                                                     <NavLink
-                                                        to={`/checkout`}
+                                                        to="/checkout"
+                                                        state={{ totalPrice }} // Pass totalPrice as state
                                                         className="bg-black text-white p-2 rounded-md w-full text-center"
                                                     >
-                                                        Checkout
+                                                        Proceed to Checkout
                                                     </NavLink>
                                                 </div>
                                             </div>

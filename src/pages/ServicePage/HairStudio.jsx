@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
-import wallPanelsBanner from '../../assets/wallPanelsBanner.jpg'
+import hairStudioBanner from '../../assets/hairStudioBanner.jpg'
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { firebaseApp } from '../firebase/firebase';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-const WallPanels = () => {
-    const [wallPanels, setWallPanels] = useState([]);
+
+const HairStudio = () => {
+    const [hairStudio, setHairStudio] = useState([]);
     const [mainHeading, setMainHeading] = useState('');
     const [singleService, setSingleService] = useState({});
     const [serviceModal, setserviceModal] = useState(false);
@@ -19,7 +20,7 @@ const WallPanels = () => {
     const serviceModalRef = useRef(null);
 
 
-    const specificCategory = wallPanels["wallPanels"];
+    const specificCategory = hairStudio["hairStudio"];
     const specificObject = specificCategory ? specificCategory[0] : null; // Get the first object or null
     console.log(specificObject || null);
 
@@ -45,8 +46,8 @@ const WallPanels = () => {
 
             // Example 1: Group by category
             const groupedByCategory = data.reduce((acc, item) => {
-                // Only process items with the category 'wallPanels'
-                if (item.category === "wallPanels") {
+                // Only process items with the category 'hairStudio'
+                if (item.category === "hairStudio") {
                     if (!acc[item.category]) {
                         acc[item.category] = [];
                     }
@@ -55,8 +56,8 @@ const WallPanels = () => {
                 return acc;
             }, {});
 
-            console.log("Grouped by 'wallPanels' Category:", groupedByCategory);
-            setWallPanels(groupedByCategory);
+            console.log("Grouped by 'hairStudio' Category:", groupedByCategory);
+            setHairStudio(groupedByCategory);
             setMainHeading(specificObject.mainHeading || null);
             console.log(specificObject.mainHeading || null);
 
@@ -133,24 +134,24 @@ const WallPanels = () => {
                     <section className='py-16'>
                         <div className='grid grid-cols-2 gap-12'>
                             <div className='w-full '>
-                                <img src={wallPanelsBanner} className='object-cover h-full w-full rounded-lg' alt="" />
+                                <img src={hairStudioBanner} className='object-cover h-full w-full rounded-lg' alt="" />
                             </div>
                             <div className='w-full h-full'>
 
                                 <div className='flex flex-col '>
                                     <div className='flex items-center'>
                                         <h1 className="text-6xl font-semibold relative mr-4">
-                                            {mainHeading || "Wall Panels"}
+                                            {mainHeading || "Hair Studio"}
                                         </h1>
                                     </div>
 
                                     <div className='w-full flex flex-col gap-3'>
 
                                         <div className="flex flex-col gap-6">
-                                            {Object.keys(wallPanels).length === 0 ? (
+                                            {Object.keys(hairStudio).length === 0 ? (
                                                 <p>Loading services...</p>
                                             ) : (
-                                                Object.entries(wallPanels).map(([category, services]) => (
+                                                Object.entries(hairStudio).map(([category, services]) => (
                                                     <div key={category}>
                                                         {/* <h2 className="text-4xl font-bold">{category}</h2> */}
                                                         {services.map((service) => (
@@ -244,4 +245,4 @@ const WallPanels = () => {
     )
 }
 
-export default WallPanels
+export default HairStudio

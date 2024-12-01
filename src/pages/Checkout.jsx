@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { MdShoppingCartCheckout } from "react-icons/md";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import PaymentSummary from './PaymentSummary';
 import { FaLocationDot } from "react-icons/fa6";
 import { MdOutlineAccessTimeFilled } from "react-icons/md";
+import axios from 'axios';
 import { getAuth } from 'firebase/auth';
 import { firebaseApp } from './firebase/firebase';
-import { getFirestore } from 'firebase/firestore';
+import "react-datepicker/dist/react-datepicker.css";
+import { RiSecurePaymentFill } from "react-icons/ri";
+import { IoTime } from "react-icons/io5";
 
 const Checkout = () => {
     // const address = "123 Maplewood Avenue, Apt 4B Springfield, IL 62704 United States";
@@ -16,57 +19,44 @@ const Checkout = () => {
     };
 
     const auth = getAuth(firebaseApp);
-    const uId = auth.currentUser?.uid; 
-    const [userDoc, setUserDoc] = useState(null);  // State to store user document
-    const [loading, setLoading] = useState(true);  // State for loading status
-    const [error, setError] = useState(null);  // State to store error message
+    const uId = auth.currentUser?.uid;
+    const location = useLocation();
+    const { totalPrice } = location.state || { totalPrice: 0 };
 
-
-    const db = getFirestore(firebaseApp);
-
-    // Function to fetch the user document from Firestore
-    const fetchUserDoc = async () => {
-        if (!uId) {
-            setError('User not authenticated');
-            setLoading(false);
-            return;
-        }
-
-        try {
-            const userRef = doc(db, 'users', uId); // Reference to the user's document in the 'users' collection
-            const userSnap = await getDoc(userRef);
-
-            if (userSnap.exists()) {
-                setUserDoc(userSnap.data());  // Save user data to state
-            } else {
-                setError('User document does not exist');
-            }
-        } catch (error) {
-            setError('Error fetching user data');
-            console.error('Error fetching user document:', error);
-        } finally {
-            setLoading(false);  // Stop loading
-        }
-    };
-
-    useEffect(() => {
-        fetchUserDoc();
-    }, [uId]);  // Re-run when uId changes (e.g., if the user logs out and logs back in)
-
-    if (loading) {
-        return <div>Loading...</div>;  // Show loading message
-    }
-
-    if (error) {
-        return <div>Error: {error}</div>;  // Show error message if something goes wrong
-    }
 
     const [addressModal, setAddressModal] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [address, setAddress] = useState("Loading address...");
     const [editedAddress, setEditedAddress] = useState("");
+    const [userDocument, setUserDocument] = useState()
+    const [selectedDate, setSelectedDate] = useState(null); // State for date
+    const [selectedTime, setSelectedTime] = useState(null);
+    const [timeSlot, setTimeSlot] = useState(null);
 
     const addressModalRef = useRef(null);
+
+    const handleDateChange = (date) => {
+        setTimeSlot((prev) => ({
+            ...prev,
+            date: date,
+        }));
+    };
+
+    const handleTimeChange = (time) => {
+        setTimeSlot((prev) => ({
+            ...prev,
+            time: time,
+        }));
+    };
+
+    console.log(timeSlot);
+
+    const userDoc = async () => {
+        const response = await axios.get(`http://127.0.0.1:5001/fsdproject-2f44c/us-central1/napi/api/users/getUserById/${uId}`);
+        setUserDocument(response.data);
+        setEditedAddress(response.data.address);
+        console.log(response.data);
+    };
 
     const handleClickOutside = (event) => {
         if (addressModalRef.current && !addressModalRef.current.contains(event.target)) {
@@ -75,13 +65,16 @@ const Checkout = () => {
     };
 
     useEffect(() => {
+        userDoc();
+    }, []);
+
+    useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
 
-    const truncatedAddress = truncateWords(address, 6);
     return (
         <div className=''>
             <div className='container mx-auto '>
@@ -103,7 +96,7 @@ const Checkout = () => {
                                             Send booking details to
                                         </h3>
                                         <p className='text-lg text-slate-500'>
-                                            +91 696969696
+                                            {userDocument?.phone}
                                         </p>
                                     </div>
                                 </div>
@@ -117,7 +110,7 @@ const Checkout = () => {
                                                 Address
                                             </h3>
                                             <p className='text-lg text-slate-500'>
-                                                {truncatedAddress}
+                                                {truncateWords(editedAddress, 6)}
                                             </p>
                                         </div>
                                     </div>
@@ -128,11 +121,53 @@ const Checkout = () => {
                                         </button>
                                     </div>
                                 </div>
+                                <div className='flex gap-4 justify-between items-center border-b-2 border-gray-300 py-2'>
+                                    <div className='flex gap-4 items-center'>
+                                        <div className='p-2 bg-slate-300 rounded-md'>
+                                            <IoTime className='text-3xl' />
+
+                                        </div>
+                                        <div className='flex flex-col  justify-center'>
+                                            <h3 className='text-xl font-semibold'>
+                                                Slot
+                                            </h3>
+                                            <h3>Select Date and Time</h3>
+                                            <div>
+                                                {/* Replace with your Date Picker */}
+                                                <input
+                                                    type="date"
+                                                    onChange={(e) => handleDateChange(e.target.value)}
+                                                />
+                                            </div>
+                                            <div>
+                                                {/* Replace with your Time Picker */}
+                                                <input
+                                                    type="time"
+                                                    onChange={(e) => handleTimeChange(e.target.value)}
+                                                />
+                                            </div>
+                                            <div>
+                                                <h4>Selected Time Slot</h4>
+                                                <p>{timeSlot ? `${timeSlot.date} ${timeSlot.time}` : "None selected"}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className='flex gap-4 justify-between items-center border-b-2 border-gray-300 py-2'>
+                                    <div className='flex gap-4 items-center'>
+                                        <div className='p-2 bg-slate-300 rounded-md'>
+                                            <RiSecurePaymentFill className='text-3xl' />
+                                        </div>
+
+                                    </div>
+                                </div>
+
                             </div>
                         </section>
 
                         <div className='w-[40%]'>
-                            <PaymentSummary />
+                            <PaymentSummary totalPrice={totalPrice} />
                         </div>
                     </div>
                 </div>
@@ -150,7 +185,7 @@ const Checkout = () => {
                                 {isEditing ? (
                                     <textarea
                                         className="w-full p-2 border border-gray-300 rounded-md"
-                                        value={editedAddress}
+                                        value={userDocument?.address}
                                         onChange={(e) => setEditedAddress(e.target.value)}
                                         rows="3"
                                     />

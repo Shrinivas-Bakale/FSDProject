@@ -26,27 +26,33 @@ const SliderHome = () => {
         {
             img: wallPanels,
             title: "Wall Panels",
+            path: "/wallpanels"
         },
         {
             img: waterPurifier,
             title: "Water Purifier",
+            path: "/waterpurifier"
         },
         {
             img: smartLock,
             title: "Smart Lock",
+            path: "/smartlock"
         },
 
         {
             img: spaAyurveda,
             title: "Ayurveda Spa",
+            path: "/spaayurveda"
         },
         {
             img: hairStudio,
             title: "Hair Studio",
+            path: "/hairstudio"
         },
         {
             img: acRepair,
             title: "AC Repair",
+            path: "/acrepair"
         },
         {
             img: homePainting,
