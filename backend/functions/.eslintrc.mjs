@@ -1,11 +1,11 @@
-module.exports = {
+export default {
   env: {
     es2021: true,        // Supports modern JavaScript features
     node: true,          // Enables Node.js global variables
   },
   parserOptions: {
     ecmaVersion: 'latest', // Use the latest ECMAScript version
-    sourceType: 'script',  // Use 'script' to treat files as CommonJS (not ESM)
+    sourceType: 'module',  // Enables ES Modules (import/export)
   },
   extends: [
     'eslint:recommended',
@@ -18,7 +18,6 @@ module.exports = {
     'comma-dangle': ['error', 'always-multiline'],
     'indent': ['error', 2],
     'no-console': 'warn',
-    'no-undef': ['error', { 'typeof': true }], // Allow 'require', 'module', etc.
   },
   overrides: [
     {
@@ -31,9 +30,5 @@ module.exports = {
       },
     },
   ],
-  globals: {
-    require: 'readonly',  // Ensure require is recognized
-    module: 'readonly',   // Ensure module is recognized
-    exports: 'readonly',  // Ensure exports is recognized
-  },
+  globals: {},
 };

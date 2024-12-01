@@ -1,6 +1,6 @@
-const { db } = require("../firebase.js");
+import { db } from "../firebase.js";
 
-const create = async (req, res) => {
+export const create = async (req, res) => {
   try {
     const {
       mainHeading,
@@ -48,7 +48,7 @@ const create = async (req, res) => {
   }
 };
 
-const getAllServices = async (req, res) => {
+export const getAllServices = async (req, res) => {
   try {
     const querySnapshot = await db.collection("services").get();
     if (querySnapshot.empty) {
@@ -65,7 +65,7 @@ const getAllServices = async (req, res) => {
   }
 };
 
-const getServiceById = async (req, res) => {
+export const getServiceById = async (req, res) => {
   try {
     const { id } = req.params;
     const doc = await db.collection("services").doc(id).get();
@@ -79,7 +79,7 @@ const getServiceById = async (req, res) => {
   }
 };
 
-const updateServiceById = async (req, res) => {
+export const updateServiceById = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, description, price } = req.body;
@@ -104,7 +104,7 @@ const updateServiceById = async (req, res) => {
   }
 };
 
-const deleteServiceById = async (req, res) => {
+export const deleteServiceById = async (req, res) => {
   try {
     const { id } = req.params;
     const serviceRef = db.collection("services").doc(id);
@@ -121,12 +121,4 @@ const deleteServiceById = async (req, res) => {
     console.error("Error deleting service:", error);
     return res.status(500).send({ error: "Failed to delete service" });
   }
-};
-
-module.exports = {
-  create,
-  getAllServices,
-  getServiceById,
-  updateServiceById,
-  deleteServiceById,
 };
