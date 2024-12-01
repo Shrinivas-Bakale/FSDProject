@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import lightsBanner from '../../assets/lightsBanner.jpg'
 
 const DiwaliLights = () => {
     const [diwaliLights, setDiwaliLights] = useState()
@@ -39,13 +40,14 @@ const DiwaliLights = () => {
         <div className='bg-[#F0F0F3]'>
             <div className='container mx-auto '>
                 <div className='grid grid-cols-1'>
-                    {/* <section className='py-16'>
+                    <section className='py-16'>
                         <div className='grid grid-cols-2 gap-12'>
                             <div className='w-full '>
-                                <img src={SideImage} className='object-cover h-full w-full rounded-lg' alt="" />
+                                <img src={lightsBanner} className='object-cover h-full w-full rounded-lg' alt="" />
                             </div>
-
-                            <div className='w-full h-full'>
+                        </div>
+                    </section>
+                    {/* <div className='w-full h-full'>
 
                                 <div className='flex flex-col '>
                                     <div className='mt-6 flex items-center'>
@@ -134,11 +136,10 @@ const DiwaliLights = () => {
 
 
                                 </div>
-                            </div>
+                            </div> */}
 
 
-                        </div>
-                    </section> */}
+
                 </div>
             </div>
         </div>
