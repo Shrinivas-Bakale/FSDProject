@@ -4,6 +4,9 @@ import { NavLink } from 'react-router-dom';
 import PaymentSummary from './PaymentSummary';
 import { FaLocationDot } from "react-icons/fa6";
 import { MdOutlineAccessTimeFilled } from "react-icons/md";
+import { getAuth } from 'firebase/auth';
+import { firebaseApp } from './firebase/firebase';
+import { getFirestore } from 'firebase/firestore';
 
 const Checkout = () => {
     // const address = "123 Maplewood Avenue, Apt 4B Springfield, IL 62704 United States";
@@ -11,6 +14,52 @@ const Checkout = () => {
         const words = text.split(' ');
         return words.length > limit ? words.slice(0, limit).join(' ') + '...' : text;
     };
+
+    const auth = getAuth(firebaseApp);
+    const uId = auth.currentUser?.uid; 
+    const [userDoc, setUserDoc] = useState(null);  // State to store user document
+    const [loading, setLoading] = useState(true);  // State for loading status
+    const [error, setError] = useState(null);  // State to store error message
+
+
+    const db = getFirestore(firebaseApp);
+
+    // Function to fetch the user document from Firestore
+    const fetchUserDoc = async () => {
+        if (!uId) {
+            setError('User not authenticated');
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const userRef = doc(db, 'users', uId); // Reference to the user's document in the 'users' collection
+            const userSnap = await getDoc(userRef);
+
+            if (userSnap.exists()) {
+                setUserDoc(userSnap.data());  // Save user data to state
+            } else {
+                setError('User document does not exist');
+            }
+        } catch (error) {
+            setError('Error fetching user data');
+            console.error('Error fetching user document:', error);
+        } finally {
+            setLoading(false);  // Stop loading
+        }
+    };
+
+    useEffect(() => {
+        fetchUserDoc();
+    }, [uId]);  // Re-run when uId changes (e.g., if the user logs out and logs back in)
+
+    if (loading) {
+        return <div>Loading...</div>;  // Show loading message
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;  // Show error message if something goes wrong
+    }
 
     const [addressModal, setAddressModal] = useState(false);
     const [isEditing, setIsEditing] = useState(false);

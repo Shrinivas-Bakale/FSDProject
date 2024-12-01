@@ -51,7 +51,7 @@ const Navbar = () => {
 
     return (
         <>
-            <div className=' bg-lightBackground sticky top-0 z-50'>
+            <div className=' bg-lightBackground sticky top-0 z-30'>
                 <div className='container mx-auto '>
                     <div className='grid grid-cols-1'>
                         <nav className='  border-[#36302a]'>

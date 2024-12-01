@@ -16,23 +16,11 @@ const CategoryPage = () => {
     const serviceModalRef = useRef(null);
     const auth = getAuth(firebaseApp)
 
-    const handleClickOutside = (event) => {
-        if (serviceModalRef.current && !serviceModalRef.current.contains(event.target)) {
-            setserviceModal(false);
-        }
-    };
+    
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [1]);
-
-
-    useEffect(() => {
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
 
 
 

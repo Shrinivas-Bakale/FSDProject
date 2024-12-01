@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
-        <div className="bg-black z-50 border-t border-[#36302a]">
+        <div className="bg-black z-30 border-t border-[#36302a]">
             <div className="container mx-auto">
                 <div className="grid grid-cols-1">
                     <div className="flex justify-start items-center p-3">
