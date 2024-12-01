@@ -13,6 +13,8 @@ import Category from './pages/ServicePage/Category'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import PaymentSummary from './pages/PaymentSummary'
+import AddServices from './pages/AddServices'
+import DiwaliLights from './pages/ServicePage/DiwaliLights'
 
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/payment" element={<PaymentSummary />} />
+          <Route exact path="/addservices" element={<AddServices />} />
+          <Route exact path="/diwalilights" element={<DiwaliLights />} />
         </Route>
       </Routes>
     </Router>

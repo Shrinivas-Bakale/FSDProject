@@ -2,18 +2,42 @@ import { db } from "../firebase.js";
 
 export const create = async (req, res) => {
   try {
-    const { name, description, price } = req.body;
+    const {
+      mainHeading,
+      serviceHead,
+      price,
+      smallDescription,
+      elaboratedDescription,
+      pictureUrl,
+      category,
+    } = req.body;
 
-    if (!name || !description || !price) {
+    // Validate required fields
+    if (
+      !mainHeading ||
+      !serviceHead ||
+      !price ||
+      !smallDescription ||
+      !elaboratedDescription ||
+      !pictureUrl ||
+      !category
+    ) {
       return res.status(400).send({ error: "Missing required fields" });
     }
 
-    // Automatically generate a document with a unique ID
-    const docRef = await db
-      .collection("services")
-      .add({ name, description, price });
+    // Add the document to the 'services' collection
+    const docRef = await db.collection("services").add({
+      mainHeading,
+      serviceHead,
+      price,
+      smallDescription,
+      elaboratedDescription,
+      pictureUrl,
+      category,
+      createdAt: new Date(), // Optional: To track when it was created
+    });
 
-    // Respond with the generated ID
+    // Respond with a success message and the generated ID
     return res.status(200).send({
       message: "Service created successfully",
       id: docRef.id,

@@ -9,7 +9,7 @@ import {
 
 const router = express.Router();
 
-router.post("/create", create);
+router.post("/createService", create);
 router.get("/getAllServices", getAllServices);
 router.get("/getServiceById/:id", getServiceById);
 router.put("/updateServiceById/:id", updateServiceById);

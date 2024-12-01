@@ -66,7 +66,6 @@ export const FirebaseProvider = (props) => {
         onAuthStateChanged(firebaseAuth, (user) => {
             user ? setuser(user) : setuser(null)
         })
-
     }, [])
 
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
@@ -20,7 +20,11 @@ const Footer = () => {
                             </p>
 
                             <NavLink className=' p-2 text-xl mt-2 w-32 border-2 border-[#fafafa] bg-NavLinkBackground text-NavLinkText rounded-lg hover:bg-NavLinkHover hover:text-NavLinkBackground'>Get in touch</NavLink>
-
+                            <div className='p-2 mt-4'>
+                                <Link to={'/addservices'} >
+                                    Add Services
+                                </Link>
+                            </div>
 
                         </div>
 

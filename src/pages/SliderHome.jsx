@@ -21,6 +21,7 @@ const SliderHome = () => {
         {
             img: diwaliLights,
             title: "Diwali Lights",
+            path: "/diwalilights"
         },
         {
             img: wallPanels,
@@ -115,7 +116,7 @@ const SliderHome = () => {
                         {sliderContent.map((item, index) => (
                             <div className="flex flex-col justify-center items-start p-3" key={index} >
                                 <button
-                                onClick={() => navigate(`/category`)}
+                                onClick={() => navigate(item.path)}
                                 >
                                     <img src={item.img} alt="" className='rounded-2xl transform transition-transform duration-300 hover:scale-105' />
                                     <h5 className='font-semibold text-lg text-lightText mt-3'>{item.title}</h5>
