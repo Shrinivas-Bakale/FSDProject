@@ -45,13 +45,11 @@ const DiwaliLights = () => {
                             <div className='w-full '>
                                 <img src={lightsBanner} className='object-cover h-full w-full rounded-lg' alt="" />
                             </div>
-                        </div>
-                    </section>
-                    {/* <div className='w-full h-full'>
+                            <div className='w-full h-full'>
 
                                 <div className='flex flex-col '>
-                                    <div className='mt-6 flex items-center'>
-                                        <h1 className="text-7xl font-semibold relative mr-4">
+                                    <div className='flex items-center'>
+                                        <h1 className="text-6xl font-semibold relative mr-4">
                                             AC Repair & <br /> Service
                                         </h1>
                                     </div>
@@ -59,9 +57,9 @@ const DiwaliLights = () => {
                                     <div className='w-full flex flex-col gap-3'>
 
                                         <div className='flex gap-4 cursor-pointer'
-                                            onClick={() => {
-                                                setserviceModal(true);
-                                            }}
+                                            // onClick={() => {
+                                            //     setserviceModal(true);
+                                            // }}
 
                                         >
                                             <div className='w-3/4 flex flex-col mt-4'>
@@ -78,7 +76,7 @@ const DiwaliLights = () => {
 
                                             <div className='w-1/4 p-2 '>
                                                 <div className='mr-4 mt-5 relative'>
-                                                    <img src={SideImage} className='w-full h-full rounded-xl' alt="" />
+                                                    <img src="" className='w-full h-full rounded-xl' alt="" />
                                                     <button className='absolute  -bottom-5  left-10 text-black  rounded-xl flex justify-center items-center border-[1px] border-gray-300 bg-gray-200 mx-auto w-12 py-2 px-9'>
                                                         Add
                                                     </button>
@@ -86,57 +84,18 @@ const DiwaliLights = () => {
                                             </div>
                                         </div>
 
-                                        <div className='flex gap-4'>
-                                            <div className='w-3/4 flex flex-col mt-4'>
-                                                <h1 className='text-3xl'>
-                                                    Power Saver AC Service
-                                                </h1>
-                                                <p className='text-xl'>
-                                                    ₹199/-
-                                                </p>
-                                                <p className='text-lg'>
-                                                    Thorough cleaning of indoor unit with foam-jet spray
-                                                </p>
-                                            </div>
 
-                                            <div className='w-1/4 p-2 '>
-                                                <div className='mr-4 mt-5 relative'>
-                                                    <img src={SideImage} className='w-full h-full rounded-xl' alt="" />
-                                                    <button className='absolute  -bottom-5  left-10 text-[#955CFF] rounded-xl flex justify-center items-center border-[1px] border-gray-300 bg-gray-200 mx-auto w-12 py-2 px-9'>
-                                                        Add
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div className='flex gap-4'>
-                                            <div className='w-3/4 flex flex-col mt-4'>
-                                                <h1 className='text-3xl'>
-                                                    Power Saver AC Service
-                                                </h1>
-                                                <p className='text-xl'>
-                                                    ₹199/-
-                                                </p>
-                                                <p className='text-lg'>
-                                                    Thorough cleaning of indoor unit with foam-jet spray
-                                                </p>
-                                            </div>
 
-                                            <div className='w-1/4 p-2 '>
-                                                <div className='mr-4 mt-5 relative'>
-                                                    <img src={SideImage} className='w-full h-full rounded-xl' alt="" />
-                                                    <button className='absolute  -bottom-5  left-10 text-[#955CFF] rounded-xl flex justify-center items-center border-[1px] border-gray-300 bg-gray-200 mx-auto w-12 py-2 px-9'>
-                                                        Add
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                     </div>
 
 
                                 </div>
-                            </div> */}
+                            </div>
+                        </div>
+                    </section>
+
 
 
 

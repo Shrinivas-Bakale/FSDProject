@@ -51,6 +51,7 @@ const SliderHome = () => {
         {
             img: homePainting,
             title: "Home Painting",
+            path: "/homepainting"
         }
     ]
 

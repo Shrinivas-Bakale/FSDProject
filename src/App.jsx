@@ -15,6 +15,7 @@ import Checkout from './pages/Checkout'
 import PaymentSummary from './pages/PaymentSummary'
 import AddServices from './pages/AddServices'
 import DiwaliLights from './pages/ServicePage/DiwaliLights'
+import HomePainiting from './pages/ServicePage/HomePainiting'
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <Route exact path="/payment" element={<PaymentSummary />} />
           <Route exact path="/addservices" element={<AddServices />} />
           <Route exact path="/diwalilights" element={<DiwaliLights />} />
+          <Route exact path="/homepainting" element={<HomePainiting />} />
         </Route>
       </Routes>
     </Router>

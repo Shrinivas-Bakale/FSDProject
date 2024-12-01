@@ -4,15 +4,17 @@ import toast from "react-hot-toast";
 
 
 const AddServices = () => {
-    const [formData, setFormData] = useState({
+    const initialFormData = {
         mainHeading: "",
         serviceHead: "",
         price: "",
         smallDescription: "",
         elaboratedDescription: "",
-        pictureUrl: "", // This will store the uploaded image URL
+        pictureUrl: "",
         category: "",
-    });
+    };
+
+    const [formData, setFormData] = useState(initialFormData);
     const [imagePreview, setImagePreview] = useState(null);
 
     const handleChange = (e) => {
@@ -60,15 +62,24 @@ const AddServices = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const createServiceEndpoint = "http://127.0.0.1:5001/fsdproject-2f44c/us-central1/napi/api/example/createService";
-        const response = await axios.post(createServiceEndpoint, formData);
 
-        if (response.status === 200) {
-            toast.success("Service created successfully!");
-        }else{
-            toast.error("Failed to create service. Please try again.");
+        const createServiceEndpoint =
+            "http://127.0.0.1:5001/fsdproject-2f44c/us-central1/napi/api/example/createService";
+
+        try {
+            const response = await axios.post(createServiceEndpoint, formData);
+
+            if (response.status === 200) {
+                toast.success("Service created successfully!");
+                setFormData(initialFormData); // Clear the form data
+            } else {
+                toast.error("Failed to create service. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            toast.error("An error occurred. Please try again.");
         }
-        
+
         console.log("Form Data Submitted:", formData);
     };
 

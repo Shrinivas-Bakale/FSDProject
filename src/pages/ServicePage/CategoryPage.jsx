@@ -111,52 +111,6 @@ const CategoryPage = () => {
                                                 </div>
                                             </div>
 
-                                            <div className='flex gap-4'>
-                                                <div className='w-3/4 flex flex-col mt-4'>
-                                                    <h1 className='text-3xl'>
-                                                        Power Saver AC Service
-                                                    </h1>
-                                                    <p className='text-xl'>
-                                                        ₹199/-
-                                                    </p>
-                                                    <p className='text-lg'>
-                                                        Thorough cleaning of indoor unit with foam-jet spray
-                                                    </p>
-                                                </div>
-
-                                                <div className='w-1/4 p-2 '>
-                                                    <div className='mr-4 mt-5 relative'>
-                                                        <img src={SideImage} className='w-full h-full rounded-xl' alt="" />
-                                                        <button className='absolute  -bottom-5  left-10 text-[#955CFF] rounded-xl flex justify-center items-center border-[1px] border-gray-300 bg-gray-200 mx-auto w-12 py-2 px-9'>
-                                                            Add
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className='flex gap-4'>
-                                                <div className='w-3/4 flex flex-col mt-4'>
-                                                    <h1 className='text-3xl'>
-                                                        Power Saver AC Service
-                                                    </h1>
-                                                    <p className='text-xl'>
-                                                        ₹199/-
-                                                    </p>
-                                                    <p className='text-lg'>
-                                                        Thorough cleaning of indoor unit with foam-jet spray
-                                                    </p>
-                                                </div>
-
-                                                <div className='w-1/4 p-2 '>
-                                                    <div className='mr-4 mt-5 relative'>
-                                                        <img src={SideImage} className='w-full h-full rounded-xl' alt="" />
-                                                        <button className='absolute  -bottom-5  left-10 text-[#955CFF] rounded-xl flex justify-center items-center border-[1px] border-gray-300 bg-gray-200 mx-auto w-12 py-2 px-9'>
-                                                            Add
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                         </div>
 
 
