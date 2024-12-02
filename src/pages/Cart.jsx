@@ -86,7 +86,7 @@ const Cart = () => {
                                         <div key={item.id} className='flex justify-between items-center gap-5 border-b-2 border-gray-200 p-4 cursor-pointer' onClick={() => { getServiceById(item.id); setserviceModal(true); }}>
                                             <div>
                                                 {/* Display item image */}
-                                                <img src={item.pictureUrl || fossil} alt={item.serviceHead} className='w-3/4 drop-shadow-lg' />
+                                                <img src={item.pictureUrl || fossil} alt={item.serviceHead} className='w-60 drop-shadow-lg' />
                                             </div>
                                             <div className='flex flex-col gap-2'>
                                                 <h1 className='text-3xl'>{item.serviceHead}</h1>
