@@ -23,6 +23,7 @@ import SpaAyurveda from './pages/ServicePage/SpaAyurveda'
 import HairStudio from './pages/ServicePage/HairStudio'
 import ACRepair from './pages/ServicePage/ACRepair'
 import AboutUs from './pages/AboutUs';
+import OrdersPage from './pages/OrdersPage'
 
 
 
@@ -52,6 +53,7 @@ function App() {
           <Route exact path="/spaayurveda" element={<SpaAyurveda />} />
           <Route exact path="/hairstudio" element={<HairStudio />} />
           <Route exact path="/acrepair" element={<ACRepair />} />
+          <Route exact path="/orders" element={<OrdersPage />} />
         </Route>
       </Routes>
     </Router>

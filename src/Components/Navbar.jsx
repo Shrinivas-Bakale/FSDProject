@@ -129,6 +129,11 @@ const Navbar = () => {
                                                         </p>
                                                     </div>
                                                     <div className='py-1'>
+                                                        <button className='text-lg' onClick={() => { navigate("/orders") }}>
+                                                            Your Orders
+                                                        </button>
+                                                    </div>
+                                                    <div className='py-1'>
                                                         <button className='text-lg' onClick={() => { signOut(auth); location.reload() }}>
                                                             Logout
                                                         </button>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { firebaseApp, database, useFirebase } from '../../pages/firebase/firebase'
 import { getFirestore, collection, addDoc, doc, getDoc, query, where, getDocs, updateDoc } from 'firebase/firestore'
+import Loader from '../../assets/Animation - 1733212579288.gif'
 
 const Example = () => {
 
@@ -47,7 +48,19 @@ const Example = () => {
         } else {
             console.log("No such document!");
         }
+
+        const docRef = doc(firestore, "carts", "wj7sCKWPDkfXDNeo9XyuWKE2Z4q2");
+        const docSnap2 = await getDoc(docRef);
+
+        if (docSnap2.exists()) {
+            console.log("Document data:", docSnap2.data());
+        } else {
+            // docSnap.data() will be undefined in this case
+            console.log("No such document!");
+        }
     }
+
+
 
 
     const getDocumentsByQuery = async () => {
@@ -89,6 +102,8 @@ const Example = () => {
             <button onClick={writeUserData} className='typical-btn'>Database Data</button>
             <button onClick={putDataNew} className='typical-btn'>RealTime DataBase</button>
             <button onClick={getDataRTDB} className='typical-btn'>Get RealTime DataBase</button>
+
+            <img src={Loader} alt="" />
         </div>
     )
 }

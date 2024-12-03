@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { MdShoppingCartCheckout } from "react-icons/md";
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import PaymentSummary from './PaymentSummary';
 import { FaLocationDot } from "react-icons/fa6";
 import { MdOutlineAccessTimeFilled } from "react-icons/md";
@@ -10,6 +10,7 @@ import { firebaseApp } from './firebase/firebase';
 import "react-datepicker/dist/react-datepicker.css";
 import { RiSecurePaymentFill } from "react-icons/ri";
 import { IoTime } from "react-icons/io5";
+import toast from 'react-hot-toast';
 
 const Checkout = () => {
     // const address = "123 Maplewood Avenue, Apt 4B Springfield, IL 62704 United States";
@@ -22,15 +23,21 @@ const Checkout = () => {
     const uId = auth.currentUser?.uid;
     const location = useLocation();
     const { totalPrice } = location.state || { totalPrice: 0 };
-
+    const navigate = useNavigate();
 
     const [addressModal, setAddressModal] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [address, setAddress] = useState("Loading address...");
-    const [editedAddress, setEditedAddress] = useState("");
-    const [userDocument, setUserDocument] = useState()
-    const [selectedDate, setSelectedDate] = useState(null); // State for date
-    const [selectedTime, setSelectedTime] = useState(null);
+    const [editedAddress, setEditedAddress] = useState(() => {
+        // Retrieve the edited address from localStorage if available
+        const savedAddress = localStorage.getItem('editedAddress');
+        return savedAddress ? JSON.parse(savedAddress) : "Loading address...";
+    });
+    const [userDocument, setUserDocument] = useState(() => {
+        // Load address from localStorage
+        const savedAddress = localStorage.getItem('userAddress');
+        return savedAddress ? JSON.parse(savedAddress) : null;
+    });
     const [timeSlot, setTimeSlot] = useState(null);
 
     const addressModalRef = useRef(null);
@@ -52,12 +59,17 @@ const Checkout = () => {
     console.log(timeSlot);
 
     const userDoc = async () => {
-        const response = await axios.get(`http://127.0.0.1:5001/fsdproject-2f44c/us-central1/napi/api/users/getUserById/${uId}`);
-        setUserDocument(response.data);
-        setEditedAddress(response.data.address);
-        console.log(response.data);
+        try {
+            const response = await axios.get(`http://127.0.0.1:5001/fsdproject-2f44c/us-central1/napi/api/users/getUserById/${uId}`);
+            const userData = response.data;
+            setUserDocument(userData); // Update state
+            localStorage.setItem('userAddress', JSON.stringify(userData)); // Save to localStorage
+            setEditedAddress(userData.address);
+            localStorage.setItem('editedAddress', JSON.stringify(userData.address));
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
     };
-
     const handleClickOutside = (event) => {
         if (addressModalRef.current && !addressModalRef.current.contains(event.target)) {
             setAddressModal(false);
@@ -65,8 +77,10 @@ const Checkout = () => {
     };
 
     useEffect(() => {
-        userDoc();
-    }, []);
+        if (uId) {
+            userDoc(); // Fetch user data on mount
+        }
+    }, [uId]);
 
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
@@ -74,6 +88,73 @@ const Checkout = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
+
+    const handlePayment = async (amount) => {
+        const amountInPaise = amount;
+        console.log(amountInPaise);
+
+        try {
+            // Step 1: Create an order in the backend
+            const { data: order } = await axios.post(
+                "http://127.0.0.1:5001/fsdproject-2f44c/us-central1/napi/api/orders/order", // Replace with your backend API URL
+                {
+                    amount: amountInPaise, // Amount in paise (₹50)
+                },
+                {
+                    headers: { "Content-Type": "application/json" },
+                }
+            );
+
+            // Step 2: Configure Razorpay options
+            const options = {
+                key: "rzp_test_oV7ASKT9RRnKeX",
+                amount: order.amount, // Amount in paise
+                currency: order.currency,
+                name: "Nexesential",
+                description: "Ordering a service",
+                order_id: order.id, // Order ID from backend
+                handler: async function (response2) {
+                    // Step 3: Handle successful payment
+                    toast.success(`Payment successful! Payment ID: ${response2.razorpay_payment_id}`);
+                    console.log(response2)
+
+                    try {
+                        const orderDetails = {
+                            amount: totalPrice,
+                            address: editedAddress,
+                            timeSlot: timeSlot,
+                            uid: uId,
+                            receiptId: response2.razorpay_payment_id
+                        }
+                        console.log(orderDetails);
+                        // Send the orderDetails as request body to your backend API
+                        const response = await axios.post(
+                            'http://127.0.0.1:5001/fsdproject-2f44c/us-central1/napi/api/orders/create', // Example API endpoint
+                            orderDetails,
+                        );
+                        console.log('Order submitted:', response.data);
+                        setTimeout(() => {
+                            navigate('/orders');
+                        }, 700)
+                    } catch (error) {
+                        console.error('Error submitting order:', error);
+                    }
+
+                    // Optionally, verify payment on the backend
+                    // axios.post("http://127.0.0.1:5001/fsdproject-2f44c/us-central1/napi/api/orders/order", response)
+                    //     .then(() => toast.success("Payment verified successfully!"))
+                    //     .catch(err => toast.error("Payment verification failed:", err));
+                },
+            };
+
+            // Step 4: Open Razorpay payment popup
+            const rzp = new window.Razorpay(options);
+            rzp.open();
+        } catch (error) {
+            toast.error("Error initiating Razorpay payment:", error);
+            toast.error(`Error initiating Razorpay payment: ${error.message}`);
+        }
+    };
 
     return (
         <div className=''>
@@ -154,12 +235,23 @@ const Checkout = () => {
                                     </div>
                                 </div>
 
-                                <div className='flex gap-4 justify-between items-center border-b-2 border-gray-300 py-2'>
+                                <div className='flex flex-col items-start gap-4 justify-between  border-b-2 border-gray-300 py-2'>
                                     <div className='flex gap-4 items-center'>
                                         <div className='p-2 bg-slate-300 rounded-md'>
                                             <RiSecurePaymentFill className='text-3xl' />
                                         </div>
+                                        <div>
+                                            <h3 className='text-xl font-semibold'>
+                                                Payment Method
+                                            </h3>
+                                        </div>
+                                    </div>
 
+                                    <div className='flex flex-col w-full gap-2 justify-center'>
+
+                                        <button className='bg-black text-white p-2 rounded-md w-full text-center' onClick={() => handlePayment(totalPrice + (totalPrice * 0.18))}>
+                                            Pay {totalPrice + (totalPrice * 0.18)}
+                                        </button>
                                     </div>
                                 </div>
 

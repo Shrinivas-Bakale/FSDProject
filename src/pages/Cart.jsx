@@ -1,104 +1,108 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import fossil from "../assets/Fossil Men's Neutra Chronograph Brown Leather Strap Watch 44mm - Macy's.jpg";
-import { NavLink } from 'react-router-dom';
-import PaymentSummary from './PaymentSummary';
+import { NavLink } from "react-router-dom";
+import PaymentSummary from "./PaymentSummary";
 import { FaShoppingCart } from "react-icons/fa";
-import axios from 'axios';
-import { getAuth } from 'firebase/auth';
-import { firebaseApp } from './firebase/firebase';
+import axios from "axios";
+import { getAuth } from "firebase/auth";
+import { firebaseApp } from "./firebase/firebase";
+import { MdDelete } from "react-icons/md";
+import toast from "react-hot-toast";
 
 const Cart = () => {
-    // Initialize cartItems as an empty array
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState(() => {
+        // Load cartItems from local storage on initial load
+        const savedCartItems = localStorage.getItem("cartItems");
+        return savedCartItems ? JSON.parse(savedCartItems) : [];
+    });
     const auth = getAuth(firebaseApp);
-    const uId = auth.currentUser?.uid; // Get the logged-in user's UID
-    const [serviceModal, setserviceModal] = useState(false);
-    const serviceModalRef = useRef(null);
-    const [singleService, setSingleService] = useState({});
-    const [totalPrice, setTotalPrice] = useState(0);  // State to store total price
-
+    const uId = auth.currentUser?.uid;
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const getCartItems = async () => {
         try {
-            const response = await axios.get(`http://localhost:5001/fsdproject-2f44c/us-central1/napi/api/cart/getCartItems/${uId}`);
-
-            setCartItems(response.data || []);  // Ensure cartItems is an array
-            calculateTotal(response.data || []);
+            const response = await axios.get(
+                `http://localhost:5001/fsdproject-2f44c/us-central1/napi/api/cart/getCartItems/${uId}`
+            );
+            const fetchedItems = response.data || [];
+            setCartItems(fetchedItems); // Update state
+            calculateTotal(fetchedItems); // Calculate total
+            localStorage.setItem("cartItems", JSON.stringify(fetchedItems)); // Save to local storage
         } catch (error) {
-            console.error('Error fetching cart items:', error);
-            setCartItems([]); // Set empty array if there is an error
+            console.error("Error fetching cart items:", error);
         }
     };
 
-
     const calculateTotal = (items) => {
-        const total = items.reduce((sum, item) => sum + (parseFloat(item.price)), 0);
+        const total = items.reduce((sum, item) => sum + parseFloat(item.price), 0);
         setTotalPrice(total);
     };
+
     useEffect(() => {
         if (uId) {
             getCartItems();
         }
     }, []);
 
-    const handleClickOutside = (event) => {
-        if (serviceModalRef.current && !serviceModalRef.current.contains(event.target)) {
-            setserviceModal(false);
-        }
-    };
-
+    // Save cart items to local storage whenever they change
     useEffect(() => {
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }, [cartItems]);
 
-    const getServiceById = async (id) => {
-        try {
-            const response = await axios.get(`http://127.0.0.1:5001/fsdproject-2f44c/us-central1/napi/api/example/getServiceById/${id}`);
-            const data = response.data;
+    const handleDelete = (id) => {
+        const updatedCartItems = cartItems.filter((item) => item.id !== id);
+        setCartItems(updatedCartItems); // Update state
+        calculateTotal(updatedCartItems); // Recalculate total
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems)); // Update local storage
 
-            setSingleService(data);
-            console.log(singleService);
-
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
+        // Optionally, update the backend
+        axios
+            .delete(`http://localhost:5001/fsdproject-2f44c/us-central1/napi/api/cart/removeFromCart/${uId}/${id}`)
+            .then(() => {
+                toast.success("Item removed from cart successfully!");
+            })
+            .catch((error) => {
+                console.error("Error deleting item:", error);
+                toast.error("Failed to remove item. Please try again.");
+            });
     };
 
     return (
-        <div className=''>
-            <div className='container mx-auto'>
-                <div className='grid grid-cols-1'>
-                    <div className='flex items-center justify-start gap-5 px-52 py-5 border-b-2 border-gray-200 mx-8'>
-                        <FaShoppingCart className='text-4xl' />
-                        <h1 className='text-3xl'>Your Cart</h1>
+        <div>
+            <div className="container mx-auto">
+                <div className="grid grid-cols-1">
+                    <div className="flex items-center justify-start gap-5 px-52 py-5 border-b-2 border-gray-200 mx-8">
+                        <FaShoppingCart className="text-4xl" />
+                        <h1 className="text-3xl">Your Cart</h1>
                     </div>
-
-                    <div className='flex px-52 py-5 justify-between mx-auto w-full'>
-
-                        <section className='w-[50%]'>
+                    <div className="flex px-52 py-5 justify-between mx-auto w-full">
+                        <section className="w-[50%]">
                             <div>
-                                {/* Map over cartItems only if it's an array */}
                                 {cartItems.length > 0 ? (
                                     cartItems.map((item) => (
-                                        <div key={item.id} className='flex justify-between items-center gap-5 border-b-2 border-gray-200 p-4 cursor-pointer' onClick={() => { getServiceById(item.id); setserviceModal(true); }}>
+                                        <div key={item.id} className="flex justify-between items-center gap-5 border-b-2 border-gray-200 p-4 relative">
+                                            <button
+                                                className="absolute top-2 right-2 rounded-full text-black w-6 h-6 flex items-center justify-center text-4xl"
+                                                onClick={() => handleDelete(item.id)}
+                                            >
+                                                &times;
+                                            </button>
                                             <div>
-                                                {/* Display item image */}
-                                                <img src={item.pictureUrl || fossil} alt={item.serviceHead} className='w-60 drop-shadow-lg' />
+                                                <img
+                                                    src={item.pictureUrl || fossil}
+                                                    alt={item.serviceHead}
+                                                    className="w-60 drop-shadow-lg"
+                                                />
                                             </div>
-                                            <div className='flex flex-col gap-2'>
-                                                <h1 className='text-3xl'>{item.serviceHead}</h1>
+                                            <div className="flex flex-col gap-2">
+                                                <h1 className="text-3xl">{item.serviceHead}</h1>
                                                 <div>
-                                                    {/* Display quantity and price */}
-                                                    <p className='text-lg'>  ₹{item.price}</p>
+                                                    <p className="text-lg">₹{item.price}</p>
                                                 </div>
                                                 <div className="flex justify-center items-center w-full h-full">
-                                                    {/* Checkout link for the specific item */}
                                                     <NavLink
                                                         to="/checkout"
-                                                        state={{ totalPrice }} // Pass totalPrice as state
+                                                        state={{ totalPrice }}
                                                         className="bg-black text-white p-2 rounded-md w-full text-center"
                                                     >
                                                         Proceed to Checkout
@@ -112,60 +116,12 @@ const Cart = () => {
                                 )}
                             </div>
                         </section>
-
-                        <div className='w-[40%]'>
+                        <div className="w-[40%]">
                             <PaymentSummary totalPrice={totalPrice} />
                         </div>
                     </div>
                 </div>
             </div>
-            {
-                serviceModal && (
-
-                    <div className='fixed top-0 left-0 w-full h-full z-50 bg-gray-800 bg-opacity-50 gap-4 flex justify-center items-center'>
-                        <section className='px-72 py-16 flex justify-center items-center aos-home'>
-                            {singleService ? (
-                                <div className='w-3/4 rounded-3xl flex  items-center p-5 gap-4 bg-white' ref={serviceModalRef}>
-                                    <div className='w-1/2 rounded-3xl'>
-                                        <img
-                                            src={singleService.pictureUrl || "https://via.placeholder.com/150"}
-                                            alt={singleService.serviceHead || "Service Image"}
-                                            className='object-cover h-full rounded-3xl'
-                                        />
-                                    </div>
-
-                                    <div className='flex flex-col justify-between items-start h-full w-1/2'>
-                                        <div>
-                                            <div className='mt-2'>
-                                                <h1 className='text-4xl font-semibold'>
-                                                    {singleService.serviceHead || "Service Name"}
-                                                </h1>
-                                            </div>
-                                            <p className='text-md mt-2'>
-                                                {singleService.elaboratedDescription || "Description not available."}
-                                            </p>
-                                        </div>
-                                        <div className='w-full mt-2 flex justify-between items-center gap-4'>
-                                            <p className='text-lg font-semibold mr-3'>
-                                                <span>₹</span>{singleService.price || "N/A"} <span>/-</span>
-                                            </p>
-                                            <button
-                                                className='p-2 bg-transparent border-[1px] text-[18px] whitespace-nowrap transition-all duration-300 hover:scale-105 border-gray-700 text-black font-semibold rounded-xl'
-                                                onClick={() => handleAddToCart(singleService.id)}
-                                            >
-                                                Add to cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : (
-                                <p>Loading service details...</p>
-                            )}
-                        </section>
-                    </div>
-
-                )
-            }
         </div>
     );
 };
