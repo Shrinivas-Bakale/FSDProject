@@ -62,7 +62,7 @@ const OrdersPage = () => {
                         <div key={index} className="bg-gray-100 rounded-lg p-4 shadow-lg">
                             <h2 className="text-lg font-semibold mb-2">Order #{index + 1}</h2>
                             <div className="mb-2">
-                                <strong>Amount:</strong> ${order.amount}
+                                <strong>Amount:</strong> ₹ {order.amount}
                             </div>
                             <div className="mb-2">
                                 <strong>Address:</strong> {order.address}

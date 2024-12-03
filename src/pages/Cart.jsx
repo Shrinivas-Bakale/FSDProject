@@ -80,7 +80,7 @@ const Cart = () => {
                             <div>
                                 {cartItems.length > 0 ? (
                                     cartItems.map((item) => (
-                                        <div key={item.id} className="flex justify-between items-center gap-5 border-b-2 border-gray-200 p-4 relative">
+                                        <div key={item.id} className="flex items-center gap-5 rounded-lg shadow-md bg-slate-200 m-2 p-6 relative">
                                             <button
                                                 className="absolute top-2 right-2 rounded-full text-black w-6 h-6 flex items-center justify-center text-4xl"
                                                 onClick={() => handleDelete(item.id)}
@@ -91,19 +91,20 @@ const Cart = () => {
                                                 <img
                                                     src={item.pictureUrl || fossil}
                                                     alt={item.serviceHead}
-                                                    className="w-60 drop-shadow-lg"
+                                                    className="w-[112px] h-[112px] drop-shadow-lg"
                                                 />
                                             </div>
                                             <div className="flex flex-col gap-2">
-                                                <h1 className="text-3xl">{item.serviceHead}</h1>
+                                                <h1 className="text-xl whitespace-nowrap">{item.serviceHead}</h1>
                                                 <div>
                                                     <p className="text-lg">₹{item.price}</p>
                                                 </div>
-                                                <div className="flex justify-center items-center w-full h-full">
+                                                <div className="flex justify-center items-center w-[234px] ">
                                                     <NavLink
                                                         to="/checkout"
                                                         state={{ totalPrice }}
-                                                        className="bg-black text-white p-2 rounded-md w-full text-center"
+                                                        className="bg-black text-white px-10 py-3 whitespace-nowrap rounded-md w-full text-center"
+
                                                     >
                                                         Proceed to Checkout
                                                     </NavLink>

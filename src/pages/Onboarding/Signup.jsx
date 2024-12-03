@@ -132,7 +132,10 @@ const Signup = () => {
 
                 <div>
                   <h1 className='main-logo text-3xl mt-1'>
+                    <button onClick={() => navigate('/')}>
+
                     Nexesential
+                    </button>
                   </h1>
                 </div>
 

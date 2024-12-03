@@ -19,7 +19,7 @@ const Login = () => {
     const auth = getAuth(firebaseApp)
 
 
-  const googleProvider = new GoogleAuthProvider();
+    const googleProvider = new GoogleAuthProvider();
 
     const login = (e) => {
         e.preventDefault();
@@ -70,7 +70,9 @@ const Login = () => {
 
                             <div>
                                 <h1 className='main-logo text-3xl mt-1'>
-                                    Nexesential
+                                    <button onClick={() => navigate('/')}>
+                                        Nexesential
+                                    </button>
                                 </h1>
                             </div>
 

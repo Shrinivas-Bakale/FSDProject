@@ -8,7 +8,7 @@ import wallPanels from "../assets/wall-panels.webp";
 import waterPurifier from "../assets/water-purify.webp";
 import smartLock from "../assets/smart-lock.webp";
 import homePainting from "../assets/home-painting.webp";
-import spaAyurveda from "../assets/ayurveda-spa.webp";
+import spaAyurveda from "../assets/spa.jpg";
 import hairStudio from "../assets/hair-studio-women.webp";
 import acRepair from "../assets/ac-repair-service.webp";
 import { useNavigate } from 'react-router-dom';
@@ -99,7 +99,7 @@ const SliderHome = () => {
     };
 
     return (
-        <div className='bg-black'>
+        <div className='bg-[#FFFFD0]'>
             <div className="bg-darkBackground overflow-x-hidden pb-10 aos">
 
                 <div className="flex justify-between items-center mb-3 lg:mb-4 lg:flex-row flex-col md:flex-row xl:mb-6 px-10 ">

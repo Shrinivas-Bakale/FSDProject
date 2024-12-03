@@ -160,7 +160,7 @@ const HomePainiting = () => {
                                                         {services.map((service) => (
                                                             <div
                                                                 key={service.id}
-                                                                className="flex gap-4 cursor-pointer"
+                                                                className="flex gap-4 m-2 rounded-lg cursor-pointer shadow-md bg-slate-200 p-4"
                                                                 onClick={() => { getServiceById(service.id) }}
                                                             >
                                                                 <div className="w-3/4 flex flex-col mt-4" onClick={() => setserviceModal(true)}>
@@ -201,7 +201,7 @@ const HomePainiting = () => {
                             <div className='fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 gap-4 flex justify-center items-center'>
                                 <section className='px-72 py-16 flex justify-center items-center aos-home'>
                                     {singleService ? (
-                                        <div className='w-3/4 rounded-3xl flex z-50 items-center p-5 gap-4 bg-white' ref={serviceModalRef}>
+                                        <div className=' rounded-3xl flex flex-col z-50 items-center p-6  gap-4 bg-white' ref={serviceModalRef}>
                                             <div className='w-1/2 rounded-3xl'>
                                                 <img
                                                     src={singleService.pictureUrl || "https://via.placeholder.com/150"}
@@ -210,7 +210,7 @@ const HomePainiting = () => {
                                                 />
                                             </div>
 
-                                            <div className='flex flex-col justify-between items-start h-full w-1/2'>
+                                            <div className='flex flex-col justify-between items-start h-full '>
                                                 <div>
                                                     <div className='mt-2'>
                                                         <h1 className='text-4xl font-semibold'>
