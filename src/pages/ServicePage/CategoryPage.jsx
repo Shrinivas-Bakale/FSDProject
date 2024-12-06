@@ -70,7 +70,8 @@ const CategoryPage = () => {
 
                                         <div className='w-full flex flex-col gap-3'>
 
-                                            <div className='flex gap-4 cursor-pointer'
+                                            <div className='flex gap-4 cursor-pointer m-2 rounded-lg  shadow-md bg-slate-200 p-4
+'
                                                 onClick={() => {
                                                     setserviceModal(true);
                                                 }}

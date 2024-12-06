@@ -43,6 +43,7 @@ const Cart = () => {
             getCartItems();
         }
     }, []);
+    
 
     // Save cart items to local storage whenever they change
     useEffect(() => {
@@ -81,12 +82,12 @@ const Cart = () => {
                                 {cartItems.length > 0 ? (
                                     cartItems.map((item) => (
                                         <div key={item.id} className="flex items-center gap-5 rounded-lg shadow-md bg-slate-200 m-2 p-6 relative">
-                                            <button
+                                            {/* <button
                                                 className="absolute top-2 right-2 rounded-full text-black w-6 h-6 flex items-center justify-center text-4xl"
                                                 onClick={() => handleDelete(item.id)}
                                             >
                                                 &times;
-                                            </button>
+                                            </button> */}
                                             <div>
                                                 <img
                                                     src={item.pictureUrl || fossil}
@@ -127,4 +128,4 @@ const Cart = () => {
     );
 };
 
-export default Cart;
+export default Cart;    

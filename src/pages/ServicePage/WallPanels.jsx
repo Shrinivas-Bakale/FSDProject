@@ -156,7 +156,8 @@ const WallPanels = () => {
                                                         {services.map((service) => (
                                                             <div
                                                                 key={service.id}
-                                                                className="flex gap-4 cursor-pointer"
+                                                                className="flex gap-4 cursor-pointer m-2 rounded-lg  shadow-md bg-slate-200 p-4
+"
                                                                 onClick={() => { getServiceById(service.id) }}
                                                             >
                                                                 <div className="w-3/4 flex flex-col mt-4" onClick={() => setserviceModal(true)}>

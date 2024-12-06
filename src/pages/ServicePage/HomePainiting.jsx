@@ -141,7 +141,7 @@ const HomePainiting = () => {
                             </div>
                             <div className='w-full h-full'>
 
-                                <div className='flex flex-col '>
+                                <div className='flex flex-col p-4'>
                                     <div className='flex items-center'>
                                         <h1 className="text-6xl font-semibold relative mr-4">
                                             {mainHeading || "Home Painting"}
@@ -160,7 +160,7 @@ const HomePainiting = () => {
                                                         {services.map((service) => (
                                                             <div
                                                                 key={service.id}
-                                                                className="flex gap-4 m-2 rounded-lg cursor-pointer shadow-md bg-slate-200 p-4"
+                                                                className="flex gap-4 m-2 cursor-pointer rounded-lg shadow-md bg-slate-200 p-4"
                                                                 onClick={() => { getServiceById(service.id) }}
                                                             >
                                                                 <div className="w-3/4 flex flex-col mt-4" onClick={() => setserviceModal(true)}>
@@ -175,8 +175,8 @@ const HomePainiting = () => {
                                                                             className="w-full h-full rounded-xl"
                                                                             alt={service.serviceHead}
                                                                         />
-                                                                        <button
-                                                                            className="absolute -bottom-5 left-10 text-black rounded-xl flex justify-center items-center border-[1px] border-gray-300 bg-gray-200 mx-auto w-12 py-2 px-9"
+                                                                     <button
+                                                        className="absolute -bottom-5 left-10 text-black rounded-xl flex justify-center items-center font-semibold border-[1px] border-gray-300 bg-gray-200 mx-auto w-12 py-2 px-9"
                                                                             onClick={() => handleAddToCart(service.id)}
                                                                         >
                                                                             Add

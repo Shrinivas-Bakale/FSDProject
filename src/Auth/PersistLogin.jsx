@@ -13,12 +13,14 @@ const PersistLogin = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUserState(true)
+                
             } else {
                 setUserState(false)
             }
         })
     }, [])
 
+    console.log(userState)
     return userState ? <Outlet /> : <Navigate to='/login' replace />
 
 }

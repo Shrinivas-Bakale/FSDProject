@@ -9,7 +9,7 @@ const OrdersPage = () => {
 
     const auth = getAuth(firebaseApp);
     const uId = auth.currentUser?.uid;
-
+    console.log(uId);
     const fetchOrders = async () => {
         try {
             const response = await axios.get(`http://127.0.0.1:5001/fsdproject-2f44c/us-central1/napi/api/orders/getOrders/${uId}`);

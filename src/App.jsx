@@ -24,6 +24,7 @@ import HairStudio from './pages/ServicePage/HairStudio'
 import ACRepair from './pages/ServicePage/ACRepair'
 import AboutUs from './pages/AboutUs';
 import OrdersPage from './pages/OrdersPage'
+import VaishnaviHandi from './pages/VaishnaviHandi'
 
 
 
@@ -33,12 +34,13 @@ function App() {
       <Routes>
         {/* <Route path='userauthentication' element={<UserAuthentication />} /> */}
         <Route path='example' element={<Example />} />
+        <Route path='misshandi' element={<VaishnaviHandi />} />
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<Signup />} />
-        <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/" element={<Layout />} >  
+        <Route path="/" element={<Layout />} >
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/service" element={<ServicePage />} />
+          <Route path="/aboutus" element={<AboutUs />} />
           <Route exact path="/category" element={<CategoryPage />} />
           <Route exact path="/category1" element={<Category />} />
           <Route exact path="/cart" element={<Cart />} />

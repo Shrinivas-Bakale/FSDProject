@@ -9,7 +9,7 @@ import waterPurifier from "../assets/water-purify.webp";
 import smartLock from "../assets/smart-lock.webp";
 import homePainting from "../assets/home-painting.webp";
 import spaAyurveda from "../assets/spa.jpg";
-import hairStudio from "../assets/hair-studio-women.webp";
+import hairStudio from "../assets/hair-studio-women.jpg";
 import acRepair from "../assets/ac-repair-service.webp";
 import { useNavigate } from 'react-router-dom';
 
@@ -99,7 +99,7 @@ const SliderHome = () => {
     };
 
     return (
-        <div className='bg-[#FFFFD0]'>
+        <div className='bg-black'>
             <div className="bg-darkBackground overflow-x-hidden pb-10 aos">
 
                 <div className="flex justify-between items-center mb-3 lg:mb-4 lg:flex-row flex-col md:flex-row xl:mb-6 px-10 ">
@@ -125,7 +125,7 @@ const SliderHome = () => {
                                 <button
                                 onClick={() => navigate(item.path)}
                                 >
-                                    <img src={item.img} alt="" className='rounded-2xl transform transition-transform duration-300 hover:scale-105' />
+                                    <img src={item.img} alt="" className='rounded-2xl h-[300px] w-[260px] transform transition-transform duration-300 hover:scale-105' />
                                     <h5 className='font-semibold text-lg text-lightText mt-3'>{item.title}</h5>
                                 </button>
                             </div>
