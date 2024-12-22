@@ -17,7 +17,7 @@ const Layout = () => {
     }, [])
     return (
         <>
-            <div className="min-h-screen flex flex-col">
+            <div className="min-h-screen w-full flex flex-col">
                 <Toaster position="top-right" reverseOrder={false} />
 
                 {/* Main Content */}

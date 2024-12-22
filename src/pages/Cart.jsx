@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import fossil from "../assets/Fossil Men's Neutra Chronograph Brown Leather Strap Watch 44mm - Macy's.jpg";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import PaymentSummary from "./PaymentSummary";
 import { FaShoppingCart } from "react-icons/fa";
 import axios from "axios";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { firebaseApp } from "./firebase/firebase";
 import { MdDelete } from "react-icons/md";
 import toast from "react-hot-toast";
@@ -18,6 +18,8 @@ const Cart = () => {
     const auth = getAuth(firebaseApp);
     const uId = auth.currentUser?.uid;
     const [totalPrice, setTotalPrice] = useState(0);
+    const [userState, setUserState] = useState()
+
 
     const getCartItems = async () => {
         try {
@@ -43,7 +45,17 @@ const Cart = () => {
             getCartItems();
         }
     }, []);
-    
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserState(true)
+
+            } else {
+                setUserState(false)
+            }
+        })
+    }, [])
 
     // Save cart items to local storage whenever they change
     useEffect(() => {
@@ -69,62 +81,76 @@ const Cart = () => {
     };
 
     return (
-        <div>
-            <div className="container mx-auto">
-                <div className="grid grid-cols-1">
-                    <div className="flex items-center justify-start gap-5 px-52 py-5 border-b-2 border-gray-200 mx-8">
-                        <FaShoppingCart className="text-4xl" />
-                        <h1 className="text-3xl">Your Cart</h1>
-                    </div>
-                    <div className="flex px-52 py-5 justify-between mx-auto w-full">
-                        <section className="w-[50%]">
-                            <div>
-                                {cartItems.length > 0 ? (
-                                    cartItems.map((item) => (
-                                        <div key={item.id} className="flex items-center gap-5 rounded-lg shadow-md bg-slate-200 m-2 p-6 relative">
-                                            {/* <button
-                                                className="absolute top-2 right-2 rounded-full text-black w-6 h-6 flex items-center justify-center text-4xl"
-                                                onClick={() => handleDelete(item.id)}
-                                            >
-                                                &times;
-                                            </button> */}
-                                            <div>
-                                                <img
-                                                    src={item.pictureUrl || fossil}
-                                                    alt={item.serviceHead}
-                                                    className="w-[112px] h-[112px] drop-shadow-lg"
-                                                />
-                                            </div>
-                                            <div className="flex flex-col gap-2">
-                                                <h1 className="text-xl whitespace-nowrap">{item.serviceHead}</h1>
-                                                <div>
-                                                    <p className="text-lg">₹{item.price}</p>
-                                                </div>
-                                                <div className="flex justify-center items-center w-[234px] ">
-                                                    <NavLink
-                                                        to="/checkout"
-                                                        state={{ totalPrice }}
-                                                        className="bg-black text-white px-10 py-3 whitespace-nowrap rounded-md w-full text-center"
-
-                                                    >
-                                                        Proceed to Checkout
-                                                    </NavLink>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <p>Your cart is empty</p>
-                                )}
+        <>
+            {userState ? (
+                <div>
+                    <div className="container mx-auto">
+                        <div className="grid grid-cols-1">
+                            <div className="flex items-center justify-start gap-5 px-52 py-5 border-b-2 border-gray-200 mx-8">
+                                <FaShoppingCart className="text-4xl" />
+                                <h1 className="text-3xl">Your Cart</h1>
                             </div>
-                        </section>
-                        <div className="w-[40%]">
-                            <PaymentSummary totalPrice={totalPrice} />
+                            <div className="flex px-52 py-5 justify-between mx-auto w-full">
+                                <section className="w-[50%]">
+                                    <div>
+                                        {cartItems.length > 0 ? (
+                                            cartItems.map((item) => (
+                                                <div key={item.id} className="flex items-center gap-5 rounded-lg shadow-md bg-slate-200 m-2 p-6 relative">
+                                                    {/* <button
+                                            className="absolute top-2 right-2 rounded-full text-black w-6 h-6 flex items-center justify-center text-4xl"
+                                            onClick={() => handleDelete(item.id)}
+                                        >
+                                            &times;
+                                        </button> */}
+                                                    <div>
+                                                        <img
+                                                            src={item.pictureUrl || fossil}
+                                                            alt={item.serviceHead}
+                                                            className="w-[112px] h-[112px] drop-shadow-lg"
+                                                        />
+                                                    </div>
+                                                    <div className="flex flex-col gap-2">
+                                                        <h1 className="text-xl whitespace-nowrap">{item.serviceHead}</h1>
+                                                        <div>
+                                                            <p className="text-lg">₹{item.price}</p>
+                                                        </div>
+                                                        <div className="flex justify-center items-center w-[234px] ">
+                                                            <NavLink
+                                                                to="/checkout"
+                                                                state={{ totalPrice }}
+                                                                className="bg-black text-white px-10 py-3 whitespace-nowrap rounded-md w-full text-center"
+
+                                                            >
+                                                                Proceed to Checkout
+                                                            </NavLink>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p>Your cart is empty</p>
+                                        )}
+                                    </div>
+                                </section>
+                                <div className="w-[40%]">
+                                    <PaymentSummary totalPrice={totalPrice} />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            ) : (
+                <div className="w-full h-screen flex items-center justify-center">
+                    <div className="flex flex-col items-center gap-5">
+                        <h1 className="text-3xl font-bold">You are not logged in</h1>
+                        <div>
+                            <button className="bg-black text-white px-10 py-2 rounded-md"><Link to="/login">Login</Link></button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+        </>
     );
 };
 
