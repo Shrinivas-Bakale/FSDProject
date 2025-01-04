@@ -84,7 +84,7 @@ const AddServices = () => {
     };
 
     return (
-        <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+        <div className="max-w-3xl mx-auto my-10 p-6 bg-white rounded-lg shadow-md">
             <h1 className="text-2xl font-bold mb-6 text-center">Add New Service</h1>
             <form onSubmit={handleSubmit}>
                 {/* Main Heading */}

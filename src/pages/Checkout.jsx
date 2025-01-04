@@ -107,7 +107,7 @@ const Checkout = () => {
 
             // Step 2: Configure Razorpay options
             const options = {
-                key: "rzp_test_oV7ASKT9RRnKeX",
+                key: "rzp_test_1txnm5ZM9iktJs",
                 amount: order.amount, // Amount in paise
                 currency: order.currency,
                 name: "Nexesential",

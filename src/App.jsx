@@ -24,7 +24,8 @@ import HairStudio from './pages/ServicePage/HairStudio'
 import ACRepair from './pages/ServicePage/ACRepair'
 import AboutUs from './pages/AboutUs';
 import OrdersPage from './pages/OrdersPage'
-import VaishnaviHandi from './pages/VaishnaviHandi'
+import ProtectedRoute from './pages/ProtectedRoute';
+
 
 
 
@@ -34,7 +35,6 @@ function App() {
       <Routes>
         {/* <Route path='userauthentication' element={<UserAuthentication />} /> */}
         <Route path='example' element={<Example />} />
-        <Route path='misshandi' element={<VaishnaviHandi />} />
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<Signup />} />
         <Route path="/" element={<Layout />} >
@@ -45,8 +45,11 @@ function App() {
           <Route exact path="/category1" element={<Category />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/checkout" element={<Checkout />} />
-          <Route exact path="/payment" element={<PaymentSummary />} />
-          <Route exact path="/addservices" element={<AddServices />} />
+          <Route exact path="/payment" element={<PaymentSummary />} /> <Route
+            exact
+            path="/addservices"
+            element={<ProtectedRoute element={AddServices} />}
+          />
           <Route exact path="/homepainting" element={<HomePainiting />} />
           <Route exact path="/diwalilights" element={<DiwaliLights />} />
           <Route exact path="/wallpanels" element={<WallPanels />} />

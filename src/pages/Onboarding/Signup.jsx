@@ -164,12 +164,13 @@ const Signup = () => {
                         Phone
                       </label>
                       <input
-                        type="tel"
+                        type=""
                         id="phone"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
                         className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        maxLength={10}
                       />
                     </div>
 

@@ -99,7 +99,7 @@ const Landing = () => {
 
 
                 <div className='flex justify-around items-center relative'>
-                  <div className='ml-14 relative bottom-6 aos-home '>
+                  <div className='ml-20 relative bottom-6 aos-home '>
                     <h1 className='text-6xl font-semibold relative z-50 bottom-8'>
                       {/* Home services at<br /> your  doorstep */}
                       Experience reliable, <br /> Professional solutions <br /> At your doorstep.

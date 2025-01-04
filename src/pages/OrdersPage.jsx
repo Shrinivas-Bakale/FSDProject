@@ -59,7 +59,14 @@ const OrdersPage = () => {
                     <div className="col-span-full text-center">No orders available</div>
                 ) : (
                     orders.map((order, index) => (
-                        <div key={index} className="bg-gray-100 rounded-lg p-4 shadow-lg">
+                        <div
+                            key={index}
+                            className="bg-gray-100 rounded-lg p-4 shadow-lg"
+                            style={{
+                                maxHeight: "400px", // Limit card height
+                                overflowY: "auto",   // Allow scrolling if the content exceeds the height
+                            }}
+                        >
                             <h2 className="text-lg font-semibold mb-2">Order #{index + 1}</h2>
                             <div className="mb-2">
                                 <strong>Amount:</strong> ₹ {order.amount}
@@ -81,11 +88,8 @@ const OrdersPage = () => {
                 )}
             </div>
         </div>
-
-
-
-
     );
+
 };
 
 export default OrdersPage;
